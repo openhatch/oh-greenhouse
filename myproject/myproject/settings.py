@@ -22,12 +22,12 @@ import json
 # Development 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myproject_db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgresql_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '',
-        'PORT': 3306,
+        'PORT': 5432,
     }
 }
 log_file_dir = os.path.join(PROJECT_ROOT, 'log/supervisor/myproject.log')
@@ -38,29 +38,17 @@ try:
 		env = json.load(f)
         DATABASES = {
             'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'myproject_db',
-                'USER': env['DOTCLOUD_DB_MYSQL_LOGIN'],
-                'PASSWORD': env['DOTCLOUD_DB_MYSQL_PASSWORD'],
-                'HOST': env['DOTCLOUD_DB_MYSQL_HOST'],
-                'PORT': int(env['DOTCLOUD_DB_MYSQL_PORT']),
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'postgresql_db',
+                'USER': env['DOTCLOUD_DB_SQL_LOGIN'],
+                'PASSWORD': env['DOTCLOUD_DB_SQL_PASSWORD'],
+                'HOST': env['DOTCLOUD_DB_SQL_HOST'],
+                'PORT': int(env['DOTCLOUD_DB_SQL_PORT']),
             }
         }   
         log_file_dir = '/var/log/supervisor/myproject.log'
 except IOError:
 	print 'Cannot load environment file (dotcloud). Maybe in local server ?'
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#         'NAME': '',                      # Or path to database file if using sqlite3.
-#         'USER': '',                      # Not used with sqlite3.
-#         'PASSWORD': '',                  # Not used with sqlite3.
-#         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-#         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-#     }
-# }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -69,7 +57,7 @@ except IOError:
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
