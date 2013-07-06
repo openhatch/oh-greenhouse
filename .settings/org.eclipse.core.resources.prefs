@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//greenhouse/uploads/migrations/0001_initial.py=utf-8
+encoding//greenhouse/uploads/migrations/0002_initial.py=utf-8
+encoding//greenhouse/uploads/migrations/0004_auto__del_field_people_lpid.py=utf-8
+encoding//greenhouse/uploads/migrations/0005_auto__del_field_people_ubuntu_dev.py=utf-8
+encoding//greenhouse/uploads/migrations/0007_auto__del_field_uploads_lpid_sponsor__del_field_uploads_lpid_changer.py=utf-8

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<h1>First timers:</h1>
+
+<div class='main'>
+
+    <div class='legend'>
+    <h3>Legend:</h3>
+    <table>
+        <tr class="gt5"><td>>= 5 uploads</td></tr>
+        <tr class="gt10"><td>>= 10 uploads</td></tr>
+        <tr class="gt20"><td>>= 20 uploads</td></tr>
+        <tr class="gt50"><td>>= 50 uploads</td></tr>
+    </table>
+    </div>
+
+    <h2>Saucy</h2>
+    <table class='first_timers'>
+        <tr>
+            <th>Contacted</th>
+            <th>Uploader</th>
+            <th>Active</th>
+            <th>Total Uploads</th>
+            <th>Dates Active</th>
+        </tr>
+        {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
+            {% if 'saucy' in i.p.first_upload.release %}
+            <tr class='{{ i.color }}'>
+                <td>{% if i.p.contacted %}
+                        <center>✓</center>
+                    {% endif %}
+                </td>
+                <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
+
+                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
+                <td>{{ i.p.total_uploads }}</td>
+                {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
+                <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
+                {% else %}
+                <td>
+                    {{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ i.p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+</div>
+<br>
+<div class='main'>
+    <h2>Raring</h2>
+    <table class='first_timers'>
+        <tr>
+            <th>Contacted</th>
+            <th>Uploader</th>
+            <th>Active</th>
+            <th>Total Uploads</th>
+            <th>Dates Active</th>
+        </tr>
+        </tr>
+        {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
+            {% if 'raring' in i.p.first_upload.release %}
+            <tr class='{{ i.color }}'>
+                <td>{% if i.p.contacted %}
+                        <center>✓</center>
+                    {% endif %}
+                </td>
+                <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
+                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
+                <td>{{ i.p.total_uploads }}</td>
+                {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
+                <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
+                {% else %}
+                <td>
+                    {{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ i.p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+</div>
+<br>
+<div class='main'>
+
+    <h2>Quantal</h2>
+    <table class='first_timers'>
+        <tr>
+            <th>Contacted</th>
+            <th>Uploader</th>
+            <th>Active</th>
+            <th>Total Uploads</th>
+            <th>Dates Active</th>
+        </tr>
+        {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
+            {% if 'quantal' in i.p.first_upload.release %}
+            <tr class='{{ i.color }}'>
+                <td>{% if i.p.contacted %}
+                        <center>✓</center>
+                    {% endif %}
+                </td>
+                <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
+                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
+                <td>{{ i.p.total_uploads }}</td>
+                {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
+                <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
+                {% else %}
+                <td>
+                    {{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ i.p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+</div>
+<br>
+<div class='main'>
+
+    <h2>Precise</h2>
+    <table class='first_timers'>
+        <tr>
+            <th>Contacted</th>
+            <th>Uploader</th>
+            <th>Active</th>
+            <th>Total Uploads</th>
+            <th>Dates Active</th>
+        </tr>
+        {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
+            {% if 'precise' in i.p.first_upload.release %}
+            <tr class='{{ i.color }}'>
+                <td>{% if i.p.contacted %}
+                        <center>✓</center>
+                    {% endif %}
+                </td>
+                <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
+                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
+                <td>{{ i.p.total_uploads }}</td>
+                {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
+                <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
+                {% else %}
+                <td>
+                    {{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ i.p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

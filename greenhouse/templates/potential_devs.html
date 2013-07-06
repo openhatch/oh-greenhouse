@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<h1>Potential Ubuntu Developers</h1>
+
+<div class='main'>
+
+<h3>(Currently active and has been for more than six months with more than 40 uploads)</h3>
+
+<table>
+    <tr>
+        <th>Contacted</th>
+        <th>Developer</th>
+        <th>Uploads</th>
+        <th>Dates Active</th>
+    </tr>
+
+{% for p in potential_devs|dictsortreversed:"first_upload.timestamp" %}
+    <tr>
+        <td>{% if p|recent_contact > p.fortieth %}
+            <center>✓</center>{% endif %}
+        </td>
+        <td><a href="{{ p.email }}">{{ p.name }}</a></td>
+        <td>{{ p.total_uploads }}</td>
+        <td>{{ p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

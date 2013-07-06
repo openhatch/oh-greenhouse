@@ -1,0 +1,8 @@
+www:
+  type: python
+  config:
+    python_version: v2.7
+db:
+  type: postgresql
+  systempackages:
+    - postgresql-8.4-debversion

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+{% load comments %}
+
+{% block extrahead %}
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Release');
+      data.addColumn('number', 'Uploads');
+      data.addRows([
+        {% for field, value in uploads_per_release.items %}
+            ['{{ field }}', {{ value }}],
+        {% endfor %}
+      ]);
+
+      var options = {'legend':'in',
+                     'width':600,
+                     'height':300,
+                     'pointSize':5,
+                     colors: ['#dd4814']};
+
+      var chart = new google.visualization.LineChart(document.getElementById('uploads_per_release_chart'));
+      chart.draw(data, options);
+    }
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ person.name }} {% ubu_dev_img person.ubuntu_dev %}</h1>
+
+<div class='main'>
+<div id='person_details'>
+    <ul>
+
+        <li><b>Email:</b> <a href="mailto:{{ person.email }}"> {{ person.email }}</a></li>
+        <li><b>Ubuntu Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
+        <li><b>Active:</b> {{ person.is_active|yesno:"Yes,No" }}</li>
+        <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
+        <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
+        <li><b>Total uploads:</b> {{ person.total_uploads }}</li>
+        {% if ppu_candidates %}
+        <li><b>PPU Candidates:</b> 
+            {% for pkg in ppu_candidates %}
+            <a href="https://launchpad.net/ubuntu/+source/{{ pkg }}">{{ pkg }}</a>, </li>
+            {% endfor %}
+        {% endif %}
+
+    </ul>
+</div>
+
+<div id='whiteboard'>
+    <h2>Whiteboard:</h2>
+
+    <form action="#" method="post">{% csrf_token %}
+        {{ notes_form.notes }}
+        <input type="submit" name='save_notes' value="Save" />
+    </form>
+</div>
+
+<div id='contacts'>
+
+    <h2>Record contact:</h2>
+
+    <div id='comment-form'>
+        {% get_comment_form for person as form %}
+          <form action="{% comment_form_target %}" method="post">
+            {% csrf_token %}
+            {{ form.comment }}
+            {{ form.honeypot }}
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+            <input type="hidden" name="next" value="/contributors/{{ person.lpid }}#" />
+            <input type="submit" name="submit" value="Record contact">
+          </form>
+    </div>
+
+    <h2>Contacts:</h2>
+
+    {% get_comment_list for person as comment_list %}
+    {% for comment in comment_list reversed %}
+
+        <div id='comment'>
+            {{ comment.comment|linebreaks }}
+            <h3>#{{ forloop.revcounter }}</h3>
+        </div>
+
+        <div id='comment-details'>
+            by <a href="/users/{{ comment.user }}">{{ comment.user }}</a> on {{ comment.submit_date }}
+        </div>
+        <br>
+    {% endfor %}
+
+</div>
+
+<div id='uploads_per_release'>
+    <h2>Uploads per release:</h2>
+    <div id="uploads_per_release_chart"></div>
+</div>
+
+<div id='recent_ulpoads'>
+<h2>Most recent uploads:</h2>
+
+<table>
+    <tr>
+        <th>Package</th>
+        <th>Version</th>
+        <th>Date</th>
+    </tr>
+    {% for ul in recent_uploads %}
+    <tr>
+        <td><a href="https://launchpad.net/ubuntu/+source/{{ ul.package }}/{{ ul.version }}">{{ ul.package }}</a></td>
+        <td>{{ ul.version }}</d>
+        <td>{{ ul.timestamp }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
+{% endblock %}

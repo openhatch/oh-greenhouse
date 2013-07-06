@@ -1,0 +1,967 @@
+ERROR 2013-07-02 14:43:12,004 base 13814 139844052051712 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 103, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 321, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 223, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 230, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 29, in wrapper
+    result = func(*args)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 101, in get_callable
+    not module_has_submodule(import_module(parentmod), submod)):
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+ImportError: No module named myapp
+ERROR 2013-07-02 14:46:44,076 base 13955 139714323666688 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/Desktop/oh-greenhouse/greenhouse/uploads/views.py", line 206, in index
+    return render(request, 'index.html', dashboard())
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 53, in render
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 139, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: index.html
+ERROR 2013-07-02 14:53:48,555 base 14154 139703089116928 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 206, in index
+    return render(request, 'index.html', dashboard())
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 53, in render
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 139, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: index.html
+ERROR 2013-07-02 15:42:59,472 base 16613 139967943788288 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 208, in index
+    
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 208, in index
+    
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-03 00:51:32,281 base 5200 140615819982592 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 206, in index
+    return render(request, 'index.html', dashboard())
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 228, in dashboard
+    for p in first_timers_qs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 102, in __iter__
+    len(self)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 90, in __len__
+    self._result_cache = list(self.iterator())
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: column people.debian_dev does not exist
+LINE 1: ...ople"."total_uploads", "people"."last_upload_id", "people"."...
+                                                             ^
+
+ERROR 2013-07-03 12:20:05,999 base 5147 140130614552320 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 206, in index
+    return render(request, 'index.html', dashboard())
+  File "/home/daveeloo/Desktop/greenhouse-repository/greenhouse/uploads/views.py", line 228, in dashboard
+    for p in first_timers_qs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 102, in __iter__
+    len(self)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 90, in __len__
+    self._result_cache = list(self.iterator())
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: column people.debian_dev does not exist
+LINE 1: ...ople"."total_uploads", "people"."last_upload_id", "people"."...
+                                                             ^
+
+ERROR 2013-07-03 16:45:44,738 base 14393 140072569460480 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/greenhouse-repository/greenhouse/uploads/views.py", line 206, in index
+    return render(request, 'index.html', dashboard())
+  File "/home/daveeloo/workspace/greenhouse-repository/greenhouse/uploads/views.py", line 228, in dashboard
+    for p in first_timers_qs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 102, in __iter__
+    len(self)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 90, in __len__
+    self._result_cache = list(self.iterator())
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: column people.debian_dev does not exist
+LINE 1: ...ople"."total_uploads", "people"."last_upload_id", "people"."...
+                                                             ^
+
+ERROR 2013-07-03 17:01:47,247 base 14781 140003173811968 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/greenhouse-repository/greenhouse/uploads/views.py", line 206, in index
+    return render(request, 'index.html', dashboard())
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 49, in render
+    context_instance = RequestContext(request, current_app=current_app)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/context.py", line 179, in __init__
+    self.update(processor(request))
+  File "/home/daveeloo/workspace/greenhouse-repository/greenhouse/uploads/context_processor.py", line 11, in user_context
+    return {'in_allowed_group': in_group}
+  File "/home/daveeloo/workspace/greenhouse-repository/greenhouse/uploads/context_processor.py", line 11, in user_context
+    return {'in_allowed_group': in_group}
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-03 17:01:56,265 base 14852 140369324857088 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-03 17:44:37,913 base 15932 140466435651328 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 169, in login_begin
+    request, "OpenID discovery error: %s" % (str(exc),), status=500)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 120, in default_render_failure
+    context_instance=RequestContext(request))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 139, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: openid/failure.html
+ERROR 2013-07-03 17:45:12,324 base 15932 140466435651328 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 169, in login_begin
+    request, "OpenID discovery error: %s" % (str(exc),), status=500)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 120, in default_render_failure
+    context_instance=RequestContext(request))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 139, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: openid/failure.html
+ERROR 2013-07-03 17:46:30,882 base 15932 140466512467712 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 169, in login_begin
+    request, "OpenID discovery error: %s" % (str(exc),), status=500)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 120, in default_render_failure
+    context_instance=RequestContext(request))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 139, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: openid/failure.html
+ERROR 2013-07-03 17:48:49,623 base 15932 140466382911232 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 169, in login_begin
+    request, "OpenID discovery error: %s" % (str(exc),), status=500)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 120, in default_render_failure
+    context_instance=RequestContext(request))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 139, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: openid/failure.html
+ERROR 2013-07-03 17:56:30,513 base 15932 140466512467712 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-03 17:57:35,749 base 15932 140466512467712 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-03 18:00:47,909 base 15932 140466435651328 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-03 18:02:35,411 base 15932 140466435651328 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-03 18:05:30,114 base 17705 139825064511232 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 00:59:01,008 base 4490 140056041641728 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/views.py", line 166, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/lib/pymodules/python2.7/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 927, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 14:49:09,956 base 6864 140518344169216 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 14:52:16,355 base 7116 140370579015424 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 14:59:54,524 base 7153 140242417870592 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 15:08:09,035 base 7153 140242401085184 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 15:08:17,771 base 7153 140242409477888 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 15:12:09,162 base 7817 140309503207168 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-04 15:18:05,956 base 7927 139663813637888 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-05 12:53:29,984 base 3116 140364141070080 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-05 12:53:29,984 base 3116 140364132677376 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-05 12:55:39,784 base 3116 140364132677376 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-05 13:04:57,567 base 3599 140241364317952 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/views.py", line 176, in login_begin
+    openid_request = consumer.begin(openid_url)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 353, in begin
+    return self.beginWithoutDiscovery(service, anonymous)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 376, in beginWithoutDiscovery
+    auth_req = self.consumer.begin(service)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 598, in begin
+    assoc = self._getAssociation(service_endpoint)
+  File "/usr/lib/python2.7/dist-packages/openid/consumer/consumer.py", line 1158, in _getAssociation
+    assoc = self.store.getAssociation(endpoint.server_url)
+  File "/usr/local/lib/python2.7/dist-packages/django_openid_auth/store.py", line 72, in getAssociation
+    for assoc in assocs:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 123, in _result_iter
+    self._fill_cache()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 939, in _fill_cache
+    self._result_cache.append(next(self._iter))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 344, in _safe_iterator
+    for item in iterator:
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 301, in iterator
+    for row in compiler.results_iter():
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 775, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py", line 840, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/util.py", line 41, in execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 58, in execute
+    six.reraise(utils.DatabaseError, utils.DatabaseError(*tuple(e.args)), sys.exc_info()[2])
+  File "/usr/local/lib/python2.7/dist-packages/django/db/backends/postgresql_psycopg2/base.py", line 54, in execute
+    return self.cursor.execute(query, args)
+DatabaseError: relation "django_openid_auth_association" does not exist
+LINE 1: ...django_openid_auth_association"."assoc_type" FROM "django_op...
+                                                             ^
+
+ERROR 2013-07-05 15:26:48,543 base 13955 140616826615552 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 206, in login_begin
+    sreg_required_fields.extend(
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 206, in login_begin
+    sreg_required_fields.extend(
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-05 15:31:26,997 base 14253 139797695821568 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 236, in login_begin
+    for group in all_groups:
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 236, in login_begin
+    for group in all_groups:
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-05 15:37:36,137 base 14593 140039619008256 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 235, in login_begin
+    all_groups = Group.objects.exclude(name__in=teams_mapping_auto_blacklist)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 235, in login_begin
+    all_groups = Group.objects.exclude(name__in=teams_mapping_auto_blacklist)
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-05 15:37:39,658 base 14593 140039597659904 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 235, in login_begin
+    all_groups = Group.objects.exclude(name__in=teams_mapping_auto_blacklist)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 235, in login_begin
+    all_groups = Group.objects.exclude(name__in=teams_mapping_auto_blacklist)
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-05 15:40:06,647 base 15109 140493892413184 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 229, in login_begin
+    teams_mapping_auto = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING_AUTO', False)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 229, in login_begin
+    teams_mapping_auto = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING_AUTO', False)
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+ERROR 2013-07-05 15:40:30,861 base 15109 140493892413184 Internal Server Error: /openid/login/
+Traceback (most recent call last):
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 229, in login_begin
+    teams_mapping_auto = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING_AUTO', False)
+  File "/home/daveeloo/workspace/GreenEnv/local/lib/python2.7/site-packages/django_openid_auth/views.py", line 229, in login_begin
+    teams_mapping_auto = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING_AUTO', False)
+  File "/usr/lib/python2.7/bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit

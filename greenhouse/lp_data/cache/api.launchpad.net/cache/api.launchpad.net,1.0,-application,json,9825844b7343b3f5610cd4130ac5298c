@@ -1,0 +1,18 @@
+status: 200
+-varied-accept: application/json
+content-length: 1599
+content-location: index.json
+accept-ranges: bytes
+-varied-accept-encoding: gzip, deflate
+vary: negotiate,accept,Accept-Encoding
+server: Apache/2.2.14 (Ubuntu)
+tcn: choice
+last-modified: Tue, 25 Jun 2013 00:33:29 GMT
+-content-encoding: gzip
+etag: "63f-4dfefad914840"
+date: Wed, 26 Jun 2013 01:20:30 GMT
+content-type: application/json
+-varied-accept: application/json
+-varied-accept-encoding: gzip, deflate
+
+{"languages_collection_link": "https://api.launchpad.net/1.0/+languages", "questions_collection_link": "https://api.launchpad.net/1.0/questions", "packagesets_collection_link": "https://api.launchpad.net/1.0/package-sets", "processors_collection_link": "https://api.launchpad.net/1.0/+processors", "bug_trackers_collection_link": "https://api.launchpad.net/1.0/bugs/bugtrackers", "countries_collection_link": "https://api.launchpad.net/1.0/+countries", "me_link": "https://api.launchpad.net/1.0/people/+me", "temporary_blobs_collection_link": "https://api.launchpad.net/1.0/temporary-blobs", "branches_collection_link": "https://api.launchpad.net/1.0/branches", "project_groups_collection_link": "https://api.launchpad.net/1.0/projectgroups", "translation_import_queue_entries_collection_link": "https://api.launchpad.net/1.0/+imports", "processor_families_collection_link": "https://api.launchpad.net/1.0/+processor-families", "resource_type_link": "https://api.launchpad.net/1.0/#service-root", "bugs_collection_link": "https://api.launchpad.net/1.0/bugs", "builders_collection_link": "https://api.launchpad.net/1.0/builders", "translation_groups_collection_link": "https://api.launchpad.net/1.0/+groups", "distributions_collection_link": "https://api.launchpad.net/1.0/distros", "projects_collection_link": "https://api.launchpad.net/1.0/projects", "pillars_link": "https://api.launchpad.net/1.0/pillars", "cves_collection_link": "https://api.launchpad.net/1.0/bugs/cve", "people_collection_link": "https://api.launchpad.net/1.0/people", "services_link": "https://api.launchpad.net/1.0/services"}

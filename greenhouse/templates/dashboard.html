@@ -1,0 +1,39 @@
+{% load custom_tags %}
+{% block dashboard %}
+
+<h2>Dashboard:</h2>
+
+<div id='content' class='row-fluid'>
+
+<div class='dashboard-box span4'>
+
+    <h3>First timers:</h3>
+
+    {% for p in first_timers|dictsortreversed:"first_upload.timestamp" %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</li>
+    {% endfor %}
+
+</div>
+
+<div class='dashboard-box span4'>
+
+    <h3>Experienced:</h3>
+
+    {% for p in experienced|dictsortreversed:"last_upload.timestamp" %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.total_uploads }} uploads</li>
+    {% endfor %}
+
+</div>
+
+<div class='dashboard-box span4'>
+
+    <h3>Inactive:</h3>
+
+    {% for p in inactive|dictsortreversed:"last_upload.timestamp" %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>  <b>{% ubu_dev_img p.ubuntu_dev %}</b>, {{ p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</li>
+    {% endfor %}
+
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+# Install dependencies:
+sudo apt-get install python-django python-django-south python-launchpadlib postgresql-9.1 python-psycopg2 postgresql-9.1-debversion python-django-auth-openid python-distro-info
+#
+# Create your local settings using the sample:
+cd overview
+cp local_settings.py.sample local_settings.py
+#
+# Create a postgres user with the username and password that you set up
+# in local_settings.py
+#
+# $ sudo -u postgres createuser --superuser $USER
+# $ sudo -u postgres psql
+# postgres=# \password $USER
+#
+# Then create the two databases named in local_settings.py
+#
+# $ sudo -u postgres createdb udd # Database for the UDD dump
+# $ sudo -u postgres createdb default # Database that will be managed by Django
+#
+# Run the managment commands to build our databases:
+./manage.py get-udd-data
+./manage.py syncdb
+./manage.py migrate-upload-data
+./manage.py build_people_db
+
+# On initial creation, you also need to create the Django user groups
+# that are used for authentication.
+./manage.py create_user_groups
+
+After the first time, you will be able to just run:
+./manage.py update-all

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }}: {% trans "Page Not Found" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Page Not Found" %}</h1>
+<div class="main">
+	<p>{% blocktrans %}The page you requested could not be found.</p>
+</div>
+{% endblock %}

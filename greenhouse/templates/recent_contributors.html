@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<h1>Recent contributors</h1>
+
+<div class='main'>
+
+<h3>(active in the last two months)</h3>
+
+    <ul>
+    {% for p in recent_contributors|dictsortreversed:"last_upload.timestamp" %}
+        <li><a href="{{ p.email }}">{{ p.name }}</a>  <b>{% ubu_dev_img p.ubuntu_dev %}</b></li>
+    {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

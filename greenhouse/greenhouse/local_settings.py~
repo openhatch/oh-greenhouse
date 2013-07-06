@@ -1,0 +1,50 @@
+SECRET_KEY = '...'
+import json, os
+# Try load with Dotcloud environment file
+try:
+	with open('/home/dotcloud/environment.json') as f:
+		env = json.load(f)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'default',
+                'USER': env['DOTCLOUD_DB_SQL_LOGIN'],
+                'PASSWORD': env['DOTCLOUD_DB_SQL_PASSWORD'],
+                'HOST': env['DOTCLOUD_DB_SQL_HOST'],
+                'PORT': int(env['DOTCLOUD_DB_SQL_PORT']),
+        },
+    	    'udd': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+                'NAME': 'udd',                      # Or path to database file if using sqlite3.
+                'USER': env['DOTCLOUD_DB_SQL_LOGIN'],                      # Not used with sqlite3.
+                'PASSWORD': env['DOTCLOUD_DB_SQL_PASSWORD'],                  # Not used with sqlite3.
+                'HOST': env['DOTCLOUD_DB_SQL_HOST'],                      # Set to empty string for localhost. Not used with sqlite3.
+                'PORT': int(env['DOTCLOUD_DB_SQL_PORT']),                      # Set to empty string for default. Not used with sqlite3.
+    }
+	
+
+        }   
+        log_file_dir = '/var/log/supervisor/greenhouse.log'
+except IOError:
+	DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+                'NAME': 'default',                      # Or path to database file if using sqlite3.
+                'USER': 'daveeloo',                      # Not used with sqlite3.
+                'PASSWORD': 'password',                  # Not used with sqlite3.
+                'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+                'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    },
+    'udd': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'udd',                      # Or path to database file if using sqlite3.
+        'USER': 'daveeloo',                      # Not used with sqlite3.
+        'PASSWORD': 'password',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+settings_dir = os.path.dirname(__file__)
+PROJECT_PATH = os.path.abspath(os.path.dirname(settings_dir))
+log_file_dir = os.path.join(PROJECT_PATH, 'logs/')
+MEDIA_URL = os.path.join(PROJECT_PATH, 'media')
