@@ -19,8 +19,12 @@
 
 {% for p in potential_devs|dictsortreversed:"first_upload.timestamp" %}
     <tr>
-        <td>{% if p|recent_contact > p.fortieth %}
-            <center>✓</center>{% endif %}
+        <td>
+        	<form method="POST" action="/contacted/{{p.email}}">{% csrf_token %}
+        	<center>
+        	<input type="checkbox" {% if p.contacted %}checked="checked"{% endif %} onchange="this.form.submit();"/>
+        	</center>
+        	</form>
         </td>
         <td><a href="{{ p.email }}">{{ p.name }}</a></td>
         <td>{{ p.total_uploads }}</td>

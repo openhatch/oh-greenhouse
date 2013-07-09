@@ -164,6 +164,13 @@ def potential_devs(request):
     return render(request, 'potential_devs.html',
                   {'potential_devs': potential_devs,
                   'cutoff_upload': cutoff_upload})
+    
+def contacted(request, email):
+    if request.POST:
+        p = People.objects.get(email=email)
+        p.contacted = not p.contacted
+        p.save()
+        return HttpResponseRedirect('/contributors/potential_devs')
 
 
 def log_action(object, change_message, user):
