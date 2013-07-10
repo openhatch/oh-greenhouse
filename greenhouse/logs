@@ -965,3 +965,48 @@ Traceback (most recent call last):
   File "/usr/lib/python2.7/bdb.py", line 67, in dispatch_line
     if self.quitting: raise BdbQuit
 BdbQuit
+ERROR 2013-07-10 03:25:37,355 base 21390 140001390024448 Internal Server Error: /contributors/russell.sim@gmail.com
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 53, in person_detail
+    contacted = BooleanForm(initial={'checkbox': person.contacted})
+NameError: global name 'BooleanForm' is not defined
+ERROR 2013-07-10 03:25:42,737 base 21390 140001390024448 Internal Server Error: /contributors/russell.sim@gmail.com
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 53, in person_detail
+    contacted = BooleanForm(initial={'checkbox': person.contacted})
+NameError: global name 'BooleanForm' is not defined
+ERROR 2013-07-10 03:28:55,412 base 21390 140001390024448 Internal Server Error: /contributors/russell.sim@gmail.com
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 53, in person_detail
+    contacted = BooleanForm(initial={'checkbox': person.contacted})
+NameError: global name 'BooleanForm' is not defined
+ERROR 2013-07-10 03:29:12,985 base 21390 140001406809856 Internal Server Error: /contributors/russell.sim@gmail.com
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 53, in person_detail
+    contacted = BooleanForm(initial={'checkbox': person.contacted})
+NameError: global name 'BooleanForm' is not defined
+ERROR 2013-07-10 03:29:28,228 base 22341 140203930564352 Internal Server Error: /contributors/sam@robots.org.uk
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 53, in person_detail
+    contacted = BooleanForm(initial={'checkbox': person.contacted})
+NameError: global name 'BooleanForm' is not defined

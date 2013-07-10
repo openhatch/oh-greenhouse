@@ -50,7 +50,7 @@ def person_detail(request, email):
     if request.method == 'POST':
         if 'save_notes' in request.POST:
             notes_form = NotesForm(request.POST)
-            contacted = BooleanForm(initial={'checkbox': person.contacted})
+            #contacted = BooleanForm(initial={'checkbox': person.contacted})
             if notes_form.is_valid():
                 person.notes = notes_form.cleaned_data['notes']
                 person.save()
