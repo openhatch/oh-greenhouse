@@ -10,16 +10,32 @@ class Command(NoArgsCommand):
     def import_people(self):
         blacklist = ['katie', 'ps-jenkins', 'ubuntu-langpack',
                      'kubuntu-members', '']
+        
+        import os
+        from django.conf import settings
+        debian_devs_email_file = os.path.join(settings.PROJECT_PATH, 'debian-emails')
+        debian_devs_email_set = set()
+        with open(debian_devs_email_file) as f:
+            for email in f:
+                debian_devs_email_set.add(email)
+        
         emails = Uploads.objects.values_list('email_changer', flat=True).distinct()
         for email in emails.exclude(email_changer__in=blacklist): #does this matter
             first_ul = Uploads.objects.filter(email_changer=email).order_by('timestamp')[0]
             last_ul = Uploads.objects.filter(email_changer=email).order_by('timestamp').reverse()[0]
+
+            if email in debian_devs_email_set:
+                debian_dev = True
+            else:
+                debian_dev = False
+            
             obj, created = People.objects.get_or_create(email=email,
                                                         defaults={
                                                         'name':last_ul.name_changer,
                                                         'email':last_ul.email_changer,
                                                         'first_upload':first_ul,
-                                                        'last_upload':last_ul
+                                                        'last_upload':last_ul, 
+                                                        'ubuntu_dev': debian_dev
                                                         })
 
     def check_is_active(self):
@@ -65,4 +81,4 @@ class Command(NoArgsCommand):
         self.check_is_active()
         self.total_uploads()
         self.last_seen()
-        self.is_ubuntu_dev()
+        #self.is_ubuntu_dev()

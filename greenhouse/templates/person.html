@@ -44,7 +44,7 @@
     <ul>
 
         <li><b>Email:</b> <a href="mailto:{{ person.email }}"> {{ person.email }}</a></li>
-        <li><b>Ubuntu Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
+        <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
         <li><b>Active:</b> {{ person.is_active|yesno:"Yes,No" }}</li>
         <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
         <li><b>Last Contact:</b> {{ person|recent_contact }}</li>

@@ -265,3 +265,6 @@ def on_contact_saved(sender, comment=None, request=None, **kwargs):
     change_message = "Recorded a contact with %s." % person.name
     log_action(person, change_message, comment.user.pk)
     messages.success(request, 'Change successfully saved...')
+    
+
+        
