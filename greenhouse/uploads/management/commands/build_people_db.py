@@ -17,7 +17,7 @@ class Command(NoArgsCommand):
         debian_devs_email_set = set()
         with open(debian_devs_email_file) as f:
             for email in f:
-                debian_devs_email_set.add(email)
+                debian_devs_email_set.add(email.strip())
         
         emails = Uploads.objects.values_list('email_changer', flat=True).distinct()
         for email in emails.exclude(email_changer__in=blacklist): #does this matter
@@ -28,7 +28,6 @@ class Command(NoArgsCommand):
                 debian_dev = True
             else:
                 debian_dev = False
-            
             obj, created = People.objects.get_or_create(email=email,
                                                         defaults={
                                                         'name':last_ul.name_changer,
