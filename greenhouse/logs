@@ -1010,3 +1010,221 @@ Traceback (most recent call last):
   File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 53, in person_detail
     contacted = BooleanForm(initial={'checkbox': person.contacted})
 NameError: global name 'BooleanForm' is not defined
+ERROR 2013-07-11 15:10:40,356 base 13503 140036240439040 Internal Server Error: /contributors/first_timers.html
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 41, in first_timers
+    return render(request, 'first_timers.html', {'output': output})
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 53, in render
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 135, in find_template
+    source, display_name = loader(name, dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 43, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 49, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 157, in get_template_from_string
+    return Template(source, origin, name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 215, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 190, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 767, in do_for
+    nodelist_loop = parser.parse(('empty', 'endfor',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 902, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/smartif.py", line 191, in parse
+    self.current_token.display())
+TemplateSyntaxError: Unused ''sid'' at end of if expression.
+ERROR 2013-07-11 15:11:26,672 base 13503 140036240439040 Internal Server Error: /contributors/first_timers.html
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 41, in first_timers
+    return render(request, 'first_timers.html', {'output': output})
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 53, in render
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 135, in find_template
+    source, display_name = loader(name, dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 43, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 49, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 157, in get_template_from_string
+    return Template(source, origin, name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 215, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 190, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 767, in do_for
+    nodelist_loop = parser.parse(('empty', 'endfor',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 902, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 835, in __init__
+    super(TemplateIfParser, self).__init__(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/smartif.py", line 163, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/smartif.py", line 174, in translate_token
+    return self.create_var(token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 838, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 353, in compile_filter
+    return FilterExpression(token, self)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 570, in __init__
+    "from '%s'" % (token[upto:], token))
+TemplateSyntaxError: Could not parse the remainder: '('unstable'' from '('unstable''
+ERROR 2013-07-11 15:11:29,389 base 13503 140036240439040 Internal Server Error: /contributors/first_timers.html
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 41, in first_timers
+    return render(request, 'first_timers.html', {'output': output})
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 53, in render
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 170, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 135, in find_template
+    source, display_name = loader(name, dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 43, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 49, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 157, in get_template_from_string
+    return Template(source, origin, name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 215, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 190, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 767, in do_for
+    nodelist_loop = parser.parse(('empty', 'endfor',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 902, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 835, in __init__
+    super(TemplateIfParser, self).__init__(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/smartif.py", line 163, in __init__
+    mapped_tokens.append(self.translate_token(token))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/smartif.py", line 174, in translate_token
+    return self.create_var(token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 838, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 353, in compile_filter
+    return FilterExpression(token, self)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 570, in __init__
+    "from '%s'" % (token[upto:], token))
+TemplateSyntaxError: Could not parse the remainder: '('unstable'' from '('unstable''
+ERROR 2013-07-12 13:20:31,136 base 8683 139803936945920 Internal Server Error: /contributors/recent_contributors.html
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 115, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py", line 25, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/daveeloo/workspace/oh-greenhouse/greenhouse/uploads/views.py", line 140, in recent_contributors
+    {'recent_contributors': recent_contributors})
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 53, in render
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 177, in render_to_string
+    return t.render(context_instance)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 830, in render
+    bit = self.render_node(node, context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 124, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 830, in render
+    bit = self.render_node(node, context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 830, in render
+    bit = self.render_node(node, context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 188, in render
+    nodelist.append(node.render(context))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 1194, in render
+    t = get_template(file_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 146, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 135, in find_template
+    source, display_name = loader(name, dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 43, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 49, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 157, in get_template_from_string
+    return Template(source, origin, name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 903, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 274, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/templatetags/static.py", line 157, in do_static
+    return StaticNode.handle_token(parser, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/templatetags/static.py", line 128, in handle_token
+    "'%s' takes at least one argument (path to file)" % bits[0])
+TemplateSyntaxError: 'static' takes at least one argument (path to file)

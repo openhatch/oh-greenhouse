@@ -22,21 +22,27 @@ from django.contrib.comments.signals import comment_was_posted
 @group_perm_required()
 def first_timers(request):
     output = []
+    
+    from collections import Counter
+    releases = Counter()
+    
     for p in People.objects.all().prefetch_related("first_upload"
                                 ).prefetch_related("last_upload"):
         if p.total_uploads < 5:
             color = "lt5"
-        if p.total_uploads >= 5 and p.total_uploads < 10:
+        if 5 <= p.total_uploads < 10:
             color = "gt5"
-        if p.total_uploads >= 10 and p.total_uploads < 20:
+        if 10 <= p.total_uploads < 20:
             color = "gt10"
-        if p.total_uploads >= 20 and p.total_uploads < 50:
+        if 20 <= p.total_uploads < 50:
             color = "gt20"
         if p.total_uploads >= 50:
             color = "gt50"
         ul_info = {'p': p,
                    'color': color}
         output.append(ul_info)
+        releases[p.first_upload.release] +=1
+    print releases
     return render(request, 'first_timers.html', {'output': output})
 
 
@@ -241,11 +247,13 @@ def dashboard():
             recent_c = p.contacts.all().reverse()[0].submit_date
         else:
             recent_c = None
+        #they want to get in touch with experienced people when they do their 40th upload
         if (len(experienced) < 20 and (recent_c is None or
             recent_c < Uploads.objects.filter(email_changer=p.email
                                      ).order_by("timestamp"
                                      )[39].timestamp)):
             experienced.append(p)
+    
     for p in inactive_qs:
         if p.contacts.all():
             recent_c = p.contacts.all().reverse()[0].submit_date
@@ -266,5 +274,3 @@ def on_contact_saved(sender, comment=None, request=None, **kwargs):
     log_action(person, change_message, comment.user.pk)
     messages.success(request, 'Change successfully saved...')
     
-
-        

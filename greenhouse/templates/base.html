@@ -6,9 +6,9 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<title>{% block title %}{% trans "Developer Advisory Team Overview" %}{% endblock %}</title>
+	<title>{% block title %}{% trans "Greenhouse Overview" %}{% endblock %}</title>
 	
-	<link rel="stortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
 	
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/base.css' %}" />
@@ -36,7 +36,7 @@
 	
 	<div id="mainheader">
 		<a id="sitetitle" href="{% url 'home' %}" class="quiet">
-			<span id="sitename">{% trans "Developer Advisory Team Overview" %}</span>
+			<span id="sitename">{% trans "Greenhouse Overview" %}</span>
 		</a>
 	
 		<span id="userdata">
@@ -83,15 +83,15 @@
 <div id="footer">
 	<div id="footnav">
 		<ul>
-		<li class="toplevel"><a href="{% url 'home' %}">{% trans "DAT Overview" %}</a></li>
+		<li class="toplevel"><a href="{% url 'home' %}">{% trans "Greenhouse Overview" %}</a></li>
 		<li><a href="https://github.com/openhatch/oh-greenhouse/issues?state=open" target="_blank">{% trans "Bugs" %}</a></li>
 		<li><a href="http://github.com/openhatch/oh-greenhouse" target="_blank">{% trans "Code" %}</a></li>
 		</ul>
 	</div>
 	
 	<div id="copyright">
-		&copy; 2013 Ubuntu Developers
-		<br />Ubuntu is a registered trademark of Canonical Ltd.
+		&copy; 2013 Debian Project
+
 	</div>
 </div>
 

@@ -8,7 +8,7 @@ class Command(NoArgsCommand):
     help = "Migrate upload data from UDD to django managed database."
 
     def import_uploads(self):
-        cursor = connections['udd'].cursor()
+        cursor = connections['udd'].cursor()        
         sql = """SELECT date, distribution, source, version, changed_by_name,
                  changed_by_email, signed_by_name, signed_by_email
                  FROM upload_history ORDER BY date"""
@@ -17,6 +17,7 @@ class Command(NoArgsCommand):
         try:
             t = 'timestamp'
             latest_entry = Uploads.objects.values(t).latest(t)[t]
+            latest_entry = None
         except ObjectDoesNotExist:
             latest_entry = None
         for row in cursor.fetchall():

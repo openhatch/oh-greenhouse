@@ -17,7 +17,7 @@
     </table>
     </div>
 
-    <h2>Saucy</h2>
+    <h2>Unstable</h2>
     <table class='first_timers'>
         <tr>
             <th>Contacted</th>
@@ -27,7 +27,7 @@
             <th>Dates Active</th>
         </tr>
         {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
-            {% if 'saucy' in i.p.first_upload.release %}
+            {% if 'unstable' in i.p.first_upload.release or 'sid' in i.p.first_upload.release %}
             <tr class='{{ i.color }}'>
                 <td>{% if i.p.contacted %}
                         <center>✓</center>
@@ -52,7 +52,7 @@
 </div>
 <br>
 <div class='main'>
-    <h2>Raring</h2>
+    <h2>Experimental</h2>
     <table class='first_timers'>
         <tr>
             <th>Contacted</th>
@@ -63,7 +63,7 @@
         </tr>
         </tr>
         {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
-            {% if 'raring' in i.p.first_upload.release %}
+            {% if 'experimental' in i.p.first_upload.release %}
             <tr class='{{ i.color }}'>
                 <td>{% if i.p.contacted %}
                         <center>✓</center>
@@ -86,72 +86,5 @@
 
 </div>
 <br>
-<div class='main'>
 
-    <h2>Quantal</h2>
-    <table class='first_timers'>
-        <tr>
-            <th>Contacted</th>
-            <th>Uploader</th>
-            <th>Active</th>
-            <th>Total Uploads</th>
-            <th>Dates Active</th>
-        </tr>
-        {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
-            {% if 'quantal' in i.p.first_upload.release %}
-            <tr class='{{ i.color }}'>
-                <td>{% if i.p.contacted %}
-                        <center>✓</center>
-                    {% endif %}
-                </td>
-                <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
-                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
-                <td>{{ i.p.total_uploads }}</td>
-                {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
-                <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
-                {% else %}
-                <td>
-                    {{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ i.p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}
-                </td>
-                {% endif %}
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-
-</div>
-<br>
-<div class='main'>
-
-    <h2>Precise</h2>
-    <table class='first_timers'>
-        <tr>
-            <th>Contacted</th>
-            <th>Uploader</th>
-            <th>Active</th>
-            <th>Total Uploads</th>
-            <th>Dates Active</th>
-        </tr>
-        {% for i in output|dictsortreversed:"p.first_upload.timestamp" %}
-            {% if 'precise' in i.p.first_upload.release %}
-            <tr class='{{ i.color }}'>
-                <td>{% if i.p.contacted %}
-                        <center>✓</center>
-                    {% endif %}
-                </td>
-                <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
-                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
-                <td>{{ i.p.total_uploads }}</td>
-                {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
-                <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>
-                {% else %}
-                <td>
-                    {{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }} to {{ i.p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}
-                </td>
-                {% endif %}
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-</div>
 {% endblock %}

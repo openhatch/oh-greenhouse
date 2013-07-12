@@ -3,24 +3,23 @@
 
 {% block content %}
 
-<h1>Welcome to the DAT Overview</h1>
+<h1>Welcome to Greenhouse</h1>
 
 <div class='main'>
 
 {% if not in_allowed_group %}
     <div id='not_logged_in'>
-        <p> The DAT Overview is a tool designed to help the Ubuntu Developer
-        Advisory Team in its mission to:<p>
+        <p> Greenhouse is a tool designed to help the Debian Mentor Team in its mission to:<p>
         <br>
             <li>Reach out to new contributors, thank them for their work and get feedback.</li>
             <li>Reach out to people who might be ready to apply for upload rights and help them.</li>
             <li>Reach out to contributors that went inactive and get feedback from them and offer help.</li>
         <br>
-        <p>Currently you must be a member of the team to use the DAT Overview.
+        <p>Currently you must be a member of the team to use Greenhouse.
         In the future, we hope to provide publicly viewable anonymized data that
-        helps give a picture of the Ubuntu contributor community.</p>
+        helps give a picture of the Greenhouse contributor community.</p>
         <br>
-        <div id="link_btn"><a href="openid/login">Login Using Ubuntu SSO</a></div>         
+        <div id="link_btn"><a href="openid/login">Login Using Launchpad</a></div>         
     </div>
 
 {% else %}

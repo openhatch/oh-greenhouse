@@ -50,9 +50,9 @@
         <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
         <li><b>Total uploads:</b> {{ person.total_uploads }}</li>
         {% if ppu_candidates %}
-        <li><b>PPU Candidates:</b> 
+        <li><b><abbr title="List of packages this person has done 5+ uploads of">DM Candidates:</abbr></b> 
             {% for pkg in ppu_candidates %}
-            <a href="https://launchpad.net/ubuntu/+source/{{ pkg }}">{{ pkg }}</a>, </li>
+            <a href="http://packages.qa.debian.org/{{ pkg }}">{{ pkg }}</a>, </li>
             {% endfor %}
         {% endif %}
 
