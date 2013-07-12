@@ -17,10 +17,9 @@ class Command(NoArgsCommand):
         try:
             t = 'timestamp'
             latest_entry = Uploads.objects.values(t).latest(t)[t]
-            latest_entry = None #remove in future
         except ObjectDoesNotExist:
             latest_entry = None
-        for row in cursor.fetchall():
+        for row in self.row_iter(cursor):
             if latest_entry is None or row[0] > latest_entry:
                 if row[4] == row[6] or row[5] == row[7]:
                     spon_email = ''
@@ -33,7 +32,22 @@ class Command(NoArgsCommand):
                                   name_changer=row[4], email_changer=row[5],
                                   name_sponsor=spon_name, email_sponsor=spon_email,)
                 bulk_insert.append(uploads)
+                if len(bulk_insert) == 1000:
+                    Uploads.objects.bulk_create(bulk_insert)
+                    bulk_insert = []
+                    bulk_insert.append(uploads)
+                else:
+                    bulk_insert.append(uploads)
         Uploads.objects.bulk_create(bulk_insert)
+        cursor.close()
+        
+    def row_iter(self, cursor, size=1000):
+        while True:
+            rows = cursor.fetchmany(size)
+            if not rows:
+                break
+            for row in rows:
+                yield row
 
     def add_lpids(self):
         self.launchpad = lp('d-a-t', anonymous=True, lp_service='production')

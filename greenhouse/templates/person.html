@@ -74,7 +74,7 @@
 
     <div id='comment-form'>
         {% get_comment_form for person as form %}
-          <form action="{% comment_form_target %}" method="post">
+          <form action="{% comment_form_target %}" method="post" >
             {% csrf_token %}
             {{ form.comment }}
             {{ form.honeypot }}
