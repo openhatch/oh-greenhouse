@@ -66,6 +66,11 @@ def person_detail(request, email):
                 return HttpResponseRedirect('#')
     else:
         notes_form = NotesForm(initial={'notes': person.notes})
+        
+    suggestions = {'contact': 'This is an uncontacted new contributor, you should contact him/her',
+                   'package': 'Suggest a new package for this person to work on',
+                   'apply': 'This person should apply for Debian Developer status'}
+    
     return render(request, 'person.html', {'person': person,
                                            'recent_uploads': recent_uploads,
                                            'ppu_candidates': ppu_candidates,

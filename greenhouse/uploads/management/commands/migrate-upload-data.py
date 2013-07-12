@@ -17,7 +17,7 @@ class Command(NoArgsCommand):
         try:
             t = 'timestamp'
             latest_entry = Uploads.objects.values(t).latest(t)[t]
-            latest_entry = None
+            latest_entry = None #remove in future
         except ObjectDoesNotExist:
             latest_entry = None
         for row in cursor.fetchall():
