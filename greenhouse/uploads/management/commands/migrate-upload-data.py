@@ -20,6 +20,7 @@ class Command(NoArgsCommand):
         except ObjectDoesNotExist:
             latest_entry = None
         for row in self.row_iter(cursor):
+            print row
             if latest_entry is None or row[0] > latest_entry:
                 if row[4] == row[6] or row[5] == row[7]:
                     spon_email = ''

@@ -32,10 +32,10 @@
       chart.draw(data, options);
     }
     </script>
-
 {% endblock %}
 
 {% block content %}
+
 
 <h1>{{ person.name }} {% ubu_dev_img person.ubuntu_dev %}</h1>
 
@@ -74,7 +74,7 @@
 
     <div id='comment-form'>
         {% get_comment_form for person as form %}
-          <form action="{% comment_form_target %}" method="post" >
+          <form action="{% comment_form_target %}" method="post">
             {% csrf_token %}
             {{ form.comment }}
             {{ form.honeypot }}
@@ -129,4 +129,9 @@
 </table>
 </div>
 </div>
+  	
+<script type="text/javascript">
+	var textarea = document.getElementById('id_comment');
+	textarea.setAttribute('placeholder', 'After you contact the person leave a comment here...');
+</script> 
 {% endblock %}
