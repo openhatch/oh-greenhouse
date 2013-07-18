@@ -18,6 +18,9 @@ from uploads.forms import NotesForm, EditContrib
 from django.dispatch import receiver
 from django.contrib.comments.signals import comment_was_posted
 
+PEOPLE_BASE = People.objects.filter(control_group=False)
+def last_n_months(months):
+    return timezone.now() - timedelta(days=months*30) 
 
 @group_perm_required()
 def first_timers(request):
@@ -237,7 +240,7 @@ def dashboard():
                                 ).prefetch_related("last_upload"
                                 ).select_related('contacts'
                                 ).order_by('last_upload__timestamp').reverse()
-    first_timers_qs = people.filter(first_upload__timestamp__gte=three_months)
+    first_timers_qs = people.filter(ubuntu_dev=False).filter(first_upload__timestamp__gte=three_months)
     experienced_qs = people.filter(ubuntu_dev=False
                           ).filter(total_uploads__gte=40
                           ).filter(is_active=True)
