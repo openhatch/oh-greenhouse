@@ -99,6 +99,7 @@
 
         <div id='comment-details'>
             by <a href="/users/{{ comment.user }}">{{ comment.user }}</a> on {{ comment.submit_date }}
+    			<a href="{% url 'delete_comment' person.email comment.id %}">[delete]</a>
         </div>
         <br>
     {% endfor %}

@@ -14,6 +14,7 @@ from uploads.decorators import group_perm_required
 from uploads.models import Uploads, People, UserProfile
 from django.contrib.auth.models import User
 from uploads.forms import NotesForm, EditContrib
+from django.contrib import comments
 
 from django.dispatch import receiver
 from django.contrib.comments.signals import comment_was_posted
@@ -281,4 +282,11 @@ def on_contact_saved(sender, comment=None, request=None, **kwargs):
     change_message = "Recorded a contact with %s." % person.name
     log_action(person, change_message, comment.user.pk)
     messages.success(request, 'Change successfully saved...')
+    
+
+def delete_comment(request, email, comment_id):
+    comment = get_object_or_404(comments.get_model(), id=comment_id)
+    comment.is_removed = True
+    comment.save()
+    return HttpResponseRedirect('/contributors/' + email)
     

@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^contributors/(?P<email>.+)/edit', views.edit_person, name='edit_person'),
     url(r'^contributors/(?P<email>.+)', views.person_detail, name='person_detail'),
     url(r'^users/(?P<user>.+)', views.user_profile, name='user_profile'),
+    url(r'^delete_comment/(?P<email>.+)/(?P<comment_id>.+)', views.delete_comment, name='delete_comment'),
     url(r'^comments/', include('django.contrib.comments.urls'))
 )
 
