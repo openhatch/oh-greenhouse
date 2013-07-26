@@ -30,7 +30,7 @@ def first_timers(request):
     from collections import Counter
     releases = Counter()
     
-    for p in People.objects.all().prefetch_related("first_upload"
+    for p in People.objects.filter(ubuntu_dev=False).prefetch_related("first_upload"
                                 ).prefetch_related("last_upload"):
         if p.total_uploads < 5:
             color = "lt5"

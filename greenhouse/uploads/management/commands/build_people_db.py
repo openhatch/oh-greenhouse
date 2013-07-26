@@ -3,6 +3,7 @@ from django.core.management.base import NoArgsCommand
 from datetime import timedelta
 from django.utils import timezone
 from uploads.common.launchpad import lp_login as lp
+import re
 
 class Command(NoArgsCommand):
     help = "Create entry in people table if new LP id is found in uploads table."
@@ -29,7 +30,7 @@ class Command(NoArgsCommand):
             last_ul = Uploads.objects.filter(email_changer=email).order_by('timestamp').reverse()[0]
 
             ###CHECK IF DD
-            if email in debian_devs_email_set:
+            if email in debian_devs_email_set or re.search(r"@debian\.org", email):
                 debian_dev = True
             else:
                 debian_dev = False
