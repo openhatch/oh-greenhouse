@@ -19,10 +19,32 @@ from django.contrib import comments
 from django.dispatch import receiver
 from django.contrib.comments.signals import comment_was_posted
 
-PEOPLE_BASE = People.objects.filter(control_group=False)
-def last_n_months(months):
+def months(months):
     return timezone.now() - timedelta(days=months*30) 
 
+def group(type):
+    base = People.objects.filter(control_group=False)
+    types = {'first_timers': base.filter(ubuntu_dev=False).filter(first_upload__timestamp__gte=months(3)),
+             'experienced': base.filter(ubuntu_dev=False).filter(is_active=True).filter(total_uploads__gte=40), 
+             'inactive': base.filter(total_uploads__gte=5).filter(last_upload__timestamp__gt=months(12)).filter(last_upload__timestamp__lt=months(2)), 
+             'potential': base.filter(ubuntu_dev=False).filter(is_active=True).filter(total_uploads__gte=40).filter(first_upload__timestamp__lte=months(6))
+             }
+    return types[type].prefetch_related("first_upload").prefetch_related("last_upload")
+
+def suggestions(email):
+    person = People.objects.get(email=email)
+    if not person.ubuntu_dev and person.first_upload.timestamp > months(3):
+        return 'This is an uncontacted new contributor, you should contact him/her'
+    if not person.ubuntu_dev and person.is_active and person.total_uploads > 40 :
+        return 'Suggest a new package for this person to work on'
+    if person.last_upload.timestamp > months(12) and person.last_upload.timestamp < months(2):
+        return 'This person is inactive'
+    if not person.ubuntu_dev and person.is_active and person.total_uploads > 40 and person.first_upload.timestamp <= months(6): 
+        return 'This person should apply for Debian Developer status'
+    else:
+        return 'This person does not fall under any of the categories'
+
+                       
 @group_perm_required()
 def first_timers(request):
     output = []
@@ -30,8 +52,7 @@ def first_timers(request):
     from collections import Counter
     releases = Counter()
     
-    for p in People.objects.filter(ubuntu_dev=False).prefetch_related("first_upload"
-                                ).prefetch_related("last_upload"):
+    for p in group('first_timers'):
         if p.total_uploads < 5:
             color = "lt5"
         if 5 <= p.total_uploads < 10:
@@ -46,7 +67,6 @@ def first_timers(request):
                    'color': color}
         output.append(ul_info)
         releases[p.first_upload.release] +=1
-    print releases
     return render(request, 'first_timers.html', {'output': output})
 
 
@@ -71,16 +91,13 @@ def person_detail(request, email):
                 return HttpResponseRedirect('#')
     else:
         notes_form = NotesForm(initial={'notes': person.notes})
-        
-    suggestions = {'contact': 'This is an uncontacted new contributor, you should contact him/her',
-                   'package': 'Suggest a new package for this person to work on',
-                   'apply': 'This person should apply for Debian Developer status'}
     
     return render(request, 'person.html', {'person': person,
                                            'recent_uploads': recent_uploads,
                                            'ppu_candidates': ppu_candidates,
                                            'notes_form': notes_form,
                                            'contributor_list': contributor_list,
+                                           'suggestion' : suggestions(email), 
                                            })
 #                                           'uploads_per_release':
 #                                                uploads_per_release})
@@ -154,12 +171,8 @@ def recent_contributors(request):
 @group_perm_required()
 def lost_contributors(request):
     lost_contributors = []
-    one_year = timezone.now() - timedelta(days=365)
-    two_months = timezone.now() - timedelta(days=2 * 30)
-    for p in People.objects.all().prefetch_related('last_upload'):
-        ul_date = p.last_upload.timestamp
-        if  ul_date > one_year and ul_date < two_months:
-            lost_contributors += [p]
+    for p in group("inactive"):
+        lost_contributors += [p]
     return render(request, 'lost_contributors.html',
                   {'lost_contributors': lost_contributors})
 
@@ -167,20 +180,10 @@ def lost_contributors(request):
 @group_perm_required()
 def potential_devs(request):
     potential_devs = []
-    cutoff_upload = {}
-    six_months = timezone.now() - timedelta(days=6 * 30)
-    for p in People.objects.filter(ubuntu_dev=False
-                          ).filter(total_uploads__gte=40
-                          ).filter(is_active=True
-                          ).prefetch_related("first_upload"
-                          ).prefetch_related("last_upload"
-                          ).filter(first_upload__timestamp__lte=six_months):
-            uploads = Uploads.objects.filter(email_changer=p.email)
-            #p.fortieth = uploads.order_by("timestamp")[39].timestamp
-            potential_devs += [p]
+    for p in group("potential"):
+        potential_devs += [p]
     return render(request, 'potential_devs.html',
-                  {'potential_devs': potential_devs,
-                  'cutoff_upload': cutoff_upload})
+                  {'potential_devs': potential_devs})
     
 def contacted(request, email):
     if request.POST:
@@ -235,21 +238,11 @@ def dashboard():
     first_timers = []
     experienced = []
     inactive = []
-    three_months = timezone.now() - timedelta(days=3 * 30)
-    two_months = timezone.now() - timedelta(days=2 * 30)
-    six_months = timezone.now() - timedelta(days=6 * 30)
-    one_year = timezone.now() - timedelta(days=365)
-    people = People.objects.all().prefetch_related("first_upload"
-                                ).prefetch_related("last_upload"
-                                ).select_related('contacts'
-                                ).order_by('last_upload__timestamp').reverse()
-    first_timers_qs = people.filter(ubuntu_dev=False).filter(first_upload__timestamp__gte=three_months)
-    experienced_qs = people.filter(ubuntu_dev=False
-                          ).filter(total_uploads__gte=40
-                          ).filter(is_active=True)
-    inactive_qs = people.filter(last_upload__timestamp__gt=one_year
-                       ).filter(last_upload__timestamp__lt=two_months
-                       ).filter(total_uploads__gte=5)
+        
+    first_timers_qs = group('first_timers').select_related('contacts').order_by('last_upload__timestamp').reverse()
+    experienced_qs = group('experienced').select_related('contacts').order_by('last_upload__timestamp').reverse()
+    inactive_qs = group('inactive').select_related('contacts').order_by('last_upload__timestamp').reverse()
+    
     for p in first_timers_qs:
         if (len(first_timers) < 20 and not p.contacts.all()):
             first_timers.append(p)
@@ -260,7 +253,7 @@ def dashboard():
             recent_c = None
         #they want to get in touch with experienced people when they do their 40th upload
         if (len(experienced) < 20 and (recent_c is None or
-            ecent_c < Uploads.objects.filter(email_changer=p.email
+            recent_c < Uploads.objects.filter(email_changer=p.email
                                      ).order_by("timestamp"
                                      )[39].timestamp)):
             experienced.append(p)
