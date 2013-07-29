@@ -3,6 +3,11 @@
 {% load comments %}
 
 {% block extrahead %}
+  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  	<style>
+  		#unify { cursor:pointer; }
+  	</style>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -35,15 +40,17 @@
 {% endblock %}
 
 {% block content %}
-
-
 <h1>{{ person.name }} {% ubu_dev_img person.ubuntu_dev %}</h1>
 
 <div class='main'>
 <div id='person_details'>
     <ul>
 
-        <li><b>Email:</b> <a href="mailto:{{ person.email }}"> {{ person.email }}</a></li>
+        <li>
+        	<b>Email:</b> <a href="mailto:{{ person.email }}"> {{ person.email }}</a> 
+        	| <a id="unify" title="If this person already exists under another identity
+        	click here to merge the identities"> [unify duplicate identity] </a>
+        </li>
         <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
         <li><b>Active:</b> {{ person.is_active|yesno:"Yes,No" }}</li>
         <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
@@ -57,7 +64,15 @@
         {% endif %}
 
     </ul>
+    
 </div>
+<div id="unifier" title="Unify Identity" style="display:none">
+	<center>
+	  <p>Type in the name of the person you think this identity is a duplicate of and press "Unify" to merge him/her: </p>
+		<input id="contributors" />
+	</center>
+</div>
+
 
 <div id='whiteboard'>
     <h2>Whiteboard:</h2>
@@ -134,5 +149,27 @@
 <script type="text/javascript">
 	var textarea = document.getElementById('id_comment');
 	textarea.setAttribute('placeholder', 'After you contact the person leave a comment here...');
+	
+	var textarea = document.getElementById('id_notes');
+	textarea.setAttribute('placeholder', 'Example: This person has skills in...');
+
+  	$("#contributors").autocomplete({ 
+  		source: [{% for person in contributor_list %} "{{person.name}}", {% endfor %}]
+  		});
+
+  	$("#unify").click(function() {
+    	$("#unifier").dialog({
+      		height: 300,
+      		width: 500,
+      		modal: true,
+      		buttons: {
+      			'Unify': function() {
+					window.location="/unify/{{person.email}}/" + "asheesh@asheesh.org";
+      				}
+      		}
+    	});
+  	});
+  	
+	
 </script> 
 {% endblock %}

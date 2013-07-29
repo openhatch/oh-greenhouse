@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponseRedirect
 from collections import defaultdict
 from datetime import timedelta
@@ -53,6 +53,7 @@ def first_timers(request):
 @group_perm_required()
 def person_detail(request, email):
     person = get_object_or_404(People, email=email)
+    contributor_list = get_list_or_404(People)
     uploads = Uploads.objects.filter(email_changer=email)
     recent_uploads = uploads.order_by('timestamp').reverse()[0:10]
     #uploads_per_release = get_uploads_per_release(email)
@@ -79,6 +80,7 @@ def person_detail(request, email):
                                            'recent_uploads': recent_uploads,
                                            'ppu_candidates': ppu_candidates,
                                            'notes_form': notes_form,
+                                           'contributor_list': contributor_list,
                                            })
 #                                           'uploads_per_release':
 #                                                uploads_per_release})
@@ -258,7 +260,7 @@ def dashboard():
             recent_c = None
         #they want to get in touch with experienced people when they do their 40th upload
         if (len(experienced) < 20 and (recent_c is None or
-            recent_c < Uploads.objects.filter(email_changer=p.email
+            ecent_c < Uploads.objects.filter(email_changer=p.email
                                      ).order_by("timestamp"
                                      )[39].timestamp)):
             experienced.append(p)
@@ -290,3 +292,12 @@ def delete_comment(request, email, comment_id):
     comment.save()
     return HttpResponseRedirect('/contributors/' + email)
     
+def unify_identities(request, merge_from_email, merge_into_email):   
+    real_id = People.objects.get(email=merge_into_email)
+    dup_id = People.objects.get(email=merge_from_email)
+    dup_id.original_email = merge_from_email
+    #dup_id.email = merge_into_email #cant do this bc violates pk
+    dup_id.save()    
+    msg = "Successful unification of " + merge_from_email + " into " + merge_into_email
+    messages.success(request, msg)
+    return HttpResponseRedirect('/contributors/' + merge_into_email)
