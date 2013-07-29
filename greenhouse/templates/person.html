@@ -114,7 +114,10 @@
 
         <div id='comment-details'>
             by <a href="/users/{{ comment.user }}">{{ comment.user }}</a> on {{ comment.submit_date }}
-    			<a href="{% url 'delete_comment' person.email comment.id %}">[delete]</a>
+    			<form action="{% url 'delete_comment' person.email comment.id %}" method=POST>
+    				{% csrf_token %}
+    				<input type="submit" value="delete" />
+    			</form>
         </div>
         <br>
     {% endfor %}
