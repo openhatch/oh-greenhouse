@@ -40,7 +40,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ person.name }} </h1><p>{{ suggestion }}</p>
+<h1>{{ person.name }} </h1><p>{{ suggestion|safe }}</p>
 
 <div class='main'>
 <div id='person_details'>

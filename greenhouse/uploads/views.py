@@ -34,7 +34,7 @@ def group(type):
 def suggestions(email):
     person = People.objects.get(email=email)
     if not person.ubuntu_dev and person.first_upload.timestamp > months(3):
-        return 'This is an uncontacted new contributor, you should contact him/her'
+        return 'This new contributor has not been contacted, you should contact him/her, <a href="https://wiki.debian.org/GreeetingForNewContributors" target="_blank">click here for sample email templates</a>'
     if not person.ubuntu_dev and person.is_active and person.total_uploads > 40 :
         return 'Suggest a new package for this person to work on'
     if person.last_upload.timestamp > months(12) and person.last_upload.timestamp < months(2):
