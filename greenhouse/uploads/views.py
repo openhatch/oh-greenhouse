@@ -24,10 +24,11 @@ def months(months):
 
 def group(type):
     base = People.objects.filter(control_group=False)
+    active = base.filter(last_upload__timestamp__gte=months(4))
     types = {'first_timers': base.filter(ubuntu_dev=False).filter(first_upload__timestamp__gte=months(3)),
-             'experienced': base.filter(ubuntu_dev=False).filter(is_active=True).filter(total_uploads__gte=40), 
+             'experienced': active.filter(ubuntu_dev=False).filter(total_uploads__gte=40), 
              'inactive': base.filter(total_uploads__gte=5).filter(last_upload__timestamp__gt=months(12)).filter(last_upload__timestamp__lt=months(2)), 
-             'potential': base.filter(ubuntu_dev=False).filter(is_active=True).filter(total_uploads__gte=40).filter(first_upload__timestamp__lte=months(6))
+             'potential': active.filter(ubuntu_dev=False).filter(total_uploads__gte=40).filter(first_upload__timestamp__lte=months(6))
              }
     return types[type].prefetch_related("first_upload").prefetch_related("last_upload")
 
@@ -35,11 +36,11 @@ def suggestions(email):
     person = People.objects.get(email=email)
     if not person.ubuntu_dev and person.first_upload.timestamp > months(3):
         return 'This new contributor has not been contacted, you should contact him/her, <a href="https://wiki.debian.org/GreeetingForNewContributors" target="_blank">click here for sample email templates</a>'
-    if not person.ubuntu_dev and person.is_active and person.total_uploads > 40 :
+    if not person.ubuntu_dev and person.last_upload.timestamp > months(4) and person.total_uploads > 40 :
         return 'Suggest a new package for this person to work on'
     if person.last_upload.timestamp > months(12) and person.last_upload.timestamp < months(2):
         return 'This person is inactive'
-    if not person.ubuntu_dev and person.is_active and person.total_uploads > 40 and person.first_upload.timestamp <= months(6): 
+    if not person.ubuntu_dev and person.last_upload.timestamp > months(12) and person.total_uploads > 40 and person.first_upload.timestamp <= months(6): 
         return 'This person should apply for Debian Developer status'
     else:
         return 'This person does not fall under any of the categories'

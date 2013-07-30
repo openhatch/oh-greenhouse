@@ -34,8 +34,6 @@
                     {% endif %}
                 </td>
                 <td><a href="{{ i.p.email }}">{{ i.p.name }}</a></td>
-
-                <td>{{ i.p.is_active|yesno:"Yes,No" }}</td>
                 <td>{{ i.p.total_uploads }}</td>
                 {% if i.p.first_upload.timestamp == i.p.last_upload.timestamp %}
                 <td>{{ i.p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</td>

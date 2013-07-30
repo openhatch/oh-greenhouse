@@ -34,7 +34,6 @@ class People(models.Model):
     email = models.EmailField(blank=True, unique=True)
     original_email = models.EmailField(null=True, default=None)
     first_upload = models.ForeignKey('Uploads', related_name='+')
-    is_active = models.BooleanField(default=False)
     total_uploads = models.IntegerField(blank=True, default=0)
     last_upload = models.ForeignKey('Uploads', related_name='+')
     ubuntu_dev = models.BooleanField(default=False)

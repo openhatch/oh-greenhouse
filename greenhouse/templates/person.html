@@ -52,7 +52,6 @@
         	click here to merge the identities"> [unify duplicate identity] </a>
         </li>
         <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
-        <li><b>Active:</b> {{ person.is_active|yesno:"Yes,No" }}</li>
         <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
         <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
         <li><b>Total uploads:</b> {{ person.total_uploads }}</li>
