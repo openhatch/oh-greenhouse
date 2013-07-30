@@ -13,15 +13,12 @@ class Command(NoArgsCommand):
                  changed_by_email, signed_by_name, signed_by_email
                  FROM upload_history ORDER BY date"""
         cursor.execute(sql)
-        bulk_insert = []
         try:
             t = 'timestamp'
             latest_entry = Uploads.objects.values(t).latest(t)[t]
         except ObjectDoesNotExist:
             latest_entry = None
         for row in self.row_iter(cursor):
-            print latest_entry
-            print row
             if latest_entry is None or row[0] > latest_entry:
                 if row[4] == row[6] or row[5] == row[7]:
                     spon_email = ''
@@ -33,14 +30,7 @@ class Command(NoArgsCommand):
                                   package=row[2], version=row[3],
                                   name_changer=row[4], email_changer=row[5],
                                   name_sponsor=spon_name, email_sponsor=spon_email,)
-                bulk_insert.append(uploads)
-                if len(bulk_insert) == 1000:
-                    Uploads.objects.bulk_create(bulk_insert)
-                    bulk_insert = []
-                    bulk_insert.append(uploads)
-                else:
-                    bulk_insert.append(uploads)
-        Uploads.objects.bulk_create(bulk_insert)
+                uploads.save()
         cursor.close()
         
     def row_iter(self, cursor, size=1000):
