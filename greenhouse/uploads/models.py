@@ -42,6 +42,30 @@ class People(models.Model):
     contacted = models.BooleanField(default=False)
     control_group = models.BooleanField(default=False)
     authoritative = models.BooleanField(default=True)
+    
+    def merge(self, other):
+
+        self.email = other.email
+        self.authoritative = False
+
+        if self.first_upload.timestamp < other.first_upload.timestamp:
+            other.first_upload = self.first_upload
+        other.total_uploads += self.total_uploads
+        if self.last_upload.timestamp > other.last_upload.timestamp:
+            other.last_upload = self.last_upload
+        if self.ubuntu_dev:
+            other.ubuntu_dev = True
+        if self.notes:   
+            other.notes += "\nnotes from merged identity with email " + self.original_email + "\n" + self.notes
+        for contact in self.contacts.all():
+            other.contacts.add(contact)
+            
+        self.save()
+        other.save()
+        
+        for upload in Uploads.objects.filter(email_changer=self.email):
+            upload.email_changer = other.email
+            upload.save()
 
     class Meta:
         db_table = u'people'
