@@ -31,8 +31,8 @@ class UDD(models.Model):
 class People(models.Model):
     connection_name='default'
     name = models.TextField(blank=True)
-    email = models.EmailField(blank=True, unique=True) 
-    original_email = models.EmailField(null=True, default=None)
+    email = models.EmailField(db_index=True) 
+    original_email = models.EmailField(unique=True)
     first_upload = models.ForeignKey('Uploads', related_name='+')
     total_uploads = models.IntegerField(blank=True, default=0)
     last_upload = models.ForeignKey('Uploads', related_name='+')
@@ -41,6 +41,7 @@ class People(models.Model):
     contacts = generic.GenericRelation(Comment, object_id_field="object_pk")
     contacted = models.BooleanField(default=False)
     control_group = models.BooleanField(default=False)
+    authoritative = models.BooleanField(default=True)
 
     class Meta:
         db_table = u'people'
@@ -52,8 +53,8 @@ class Uploads(models.Model):
     package = models.TextField(blank=True)
     version = models.TextField(blank=True)
     name_changer = models.TextField(blank=True)
-    email_changer = models.EmailField(blank=True)
-    original_email_changer = models.EmailField(null=True, default=None)
+    email_changer = models.EmailField(db_index=True, blank=True)
+    original_email_changer = models.EmailField(blank=True)
     name_sponsor = models.TextField(blank=True)
     email_sponsor = models.EmailField(blank=True)
 
