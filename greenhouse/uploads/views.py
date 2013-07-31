@@ -23,17 +23,18 @@ def months(months):
     return timezone.now() - timedelta(days=months*30) 
 
 def group(type):
-    base = People.objects.filter(control_group=False)
+    base = People.objects.filter(control_group=False).filter(authoritative=True).prefetch_related("first_upload").prefetch_related("last_upload")
     active = base.filter(last_upload__timestamp__gte=months(4))
     types = {'first_timers': base.filter(ubuntu_dev=False).filter(first_upload__timestamp__gte=months(3)),
              'experienced': active.filter(ubuntu_dev=False).filter(total_uploads__gte=40), 
              'inactive': base.filter(total_uploads__gte=5).filter(last_upload__timestamp__gt=months(12)).filter(last_upload__timestamp__lt=months(2)), 
-             'potential': active.filter(ubuntu_dev=False).filter(total_uploads__gte=40).filter(first_upload__timestamp__lte=months(6))
+             'potential': active.filter(ubuntu_dev=False).filter(total_uploads__gte=40).filter(first_upload__timestamp__lte=months(6)),
+             'recent': base.filter(last_upload__timestamp__gte=months(2)),
              }
-    return types[type].prefetch_related("first_upload").prefetch_related("last_upload")
+    return types[type]
 
 def suggestions(email):
-    person = People.objects.get(email=email)
+    person = People.objects.get(email=email, authoritative=True)
     if not person.ubuntu_dev and person.first_upload.timestamp > months(3):
         return 'This new contributor has not been contacted, you should contact him/her, <a href="https://wiki.debian.org/GreeetingForNewContributors" target="_blank">click here for sample email templates</a>'
     if not person.ubuntu_dev and person.last_upload.timestamp > months(4) and person.total_uploads > 40 :
@@ -73,8 +74,8 @@ def first_timers(request):
 
 @group_perm_required()
 def person_detail(request, email):
-    person = get_object_or_404(People, email=email)
-    contributor_list = get_list_or_404(People)
+    person = get_object_or_404(People, email=email, authoritative=True)
+    contributor_list = get_list_or_404(People, authoritative=True)
     uploads = Uploads.objects.filter(email_changer=email)
     recent_uploads = uploads.order_by('timestamp').reverse()[0:10]
     #uploads_per_release = get_uploads_per_release(email)
@@ -161,10 +162,8 @@ def edit_person(request, email):
 @group_perm_required()
 def recent_contributors(request):
     recent_contributors = []
-    cutoff_date = timezone.now() - timedelta(days=2 * 30)
-    for p in People.objects.all().prefetch_related("last_upload"):
-        if p.last_upload.timestamp > cutoff_date:
-            recent_contributors += [p]
+    for p in group('recent'):
+        recent_contributors += [p]
     return render(request, 'recent_contributors.html',
                   {'recent_contributors': recent_contributors})
 
@@ -287,11 +286,9 @@ def delete_comment(request, email, comment_id):
     return HttpResponseRedirect('/contributors/' + email)
     
 def unify_identities(request, merge_from_email, merge_into_email):   
-    real_id = People.objects.get(email=merge_into_email)
-    dup_id = People.objects.get(email=merge_from_email)
-    dup_id.original_email = merge_from_email
-    #dup_id.email = merge_into_email #cant do this bc violates pk
-    dup_id.save()    
+    merge_from = People.objects.get(email=merge_from_email, authoritative=True)
+    merge_into = People.objects.get(email=merge_into_email, authoritative=True)
+    merge_from.merge(merge_into)
     msg = "Successful unification of " + merge_from_email + " into " + merge_into_email
     messages.success(request, msg)
     return HttpResponseRedirect('/contributors/' + merge_into_email)
