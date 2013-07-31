@@ -44,7 +44,6 @@ class People(models.Model):
     authoritative = models.BooleanField(default=True)
     
     def merge(self, other):
-
         self.email = other.email
         self.authoritative = False
 

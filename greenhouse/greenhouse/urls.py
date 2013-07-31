@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     url(r'^contributors/(?P<email>.+)', views.person_detail, name='person_detail'),
     url(r'^users/(?P<user>.+)', views.user_profile, name='user_profile'),
     url(r'^delete_comment/(?P<email>.+)/(?P<comment_id>.+)', views.delete_comment, name='delete_comment'),
-    url(r'^unify/(?P<merge_from_email>.+)/(?P<merge_into_email>.+)', views.unify_identities, name='unify_identities'), 
+    url(r'^unify', views.unify_identities, name='unify_identities'), 
     url(r'^comments/', include('django.contrib.comments.urls'))
 )
 

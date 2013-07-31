@@ -66,9 +66,19 @@
     
 </div>
 <div id="unifier" title="Unify Identity" style="display:none">
+	<p>Type in the name of the person you think this identity is a duplicate of and press "Unify" to merge him/her: </p>
+	<datalist id="contributors">
+		{% for person in contributor_list %}
+			<option value="{{person.name}} &lt;{{person.email}}&gt;">
+		{% endfor %}
+	</datalist>
 	<center>
-	  <p>Type in the name of the person you think this identity is a duplicate of and press "Unify" to merge him/her: </p>
-		<input id="contributors" />
+		<form method="POST" action="/unify">
+			{% csrf_token %}
+			<input name="merge_from" type="hidden" value="{{person.email}}" />
+			<input name="merge_into" list="contributors" />
+			<input type="submit" value="Unify!"/>
+		</form>
 	</center>
 </div>
 
@@ -155,20 +165,11 @@
 	var textarea = document.getElementById('id_notes');
 	textarea.setAttribute('placeholder', 'Example: This person has skills in...');
 
-  	$("#contributors").autocomplete({ 
-  		source: [{% for person in contributor_list %} "{{person.name}}", {% endfor %}]
-  		});
-
   	$("#unify").click(function() {
     	$("#unifier").dialog({
       		height: 300,
       		width: 500,
       		modal: true,
-      		buttons: {
-      			'Unify': function() {
-					window.location="/unify/{{person.email}}/" + "asheesh@asheesh.org";
-      				}
-      		}
     	});
   	});
   	

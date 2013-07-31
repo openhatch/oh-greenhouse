@@ -19,6 +19,8 @@ from django.contrib import comments
 from django.dispatch import receiver
 from django.contrib.comments.signals import comment_was_posted
 
+import re
+
 def months(months):
     return timezone.now() - timedelta(days=months*30) 
 
@@ -285,10 +287,14 @@ def delete_comment(request, email, comment_id):
     comment.save()
     return HttpResponseRedirect('/contributors/' + email)
     
-def unify_identities(request, merge_from_email, merge_into_email):   
-    merge_from = People.objects.get(email=merge_from_email, authoritative=True)
-    merge_into = People.objects.get(email=merge_into_email, authoritative=True)
-    merge_from.merge(merge_into)
-    msg = "Successful unification of " + merge_from_email + " into " + merge_into_email
-    messages.success(request, msg)
-    return HttpResponseRedirect('/contributors/' + merge_into_email)
+def unify_identities(request):  
+    if request.POST:
+        merge_from_email = request.POST["merge_from"]
+        merge_into_data = request.POST["merge_into"]
+        merge_into_email = re.search(r"<(.*)>", merge_into_data).groups()[0]
+        merge_from = People.objects.get(email=merge_from_email, authoritative=True)
+        merge_into = People.objects.get(email=merge_into_email, authoritative=True)
+        merge_from.merge(merge_into)
+        msg = "Successful unification of " + merge_from_email + " into " + merge_into_email
+        messages.success(request, msg)
+        return HttpResponseRedirect('/contributors/' + merge_into_email)
