@@ -28,11 +28,17 @@ class Command(NoArgsCommand):
                     spon_email = row[7]
                 uploads = Uploads(timestamp=row[0], release=row[1],
                                   package=row[2], version=row[3],
-                                  name_changer=row[4], email_changer=row[5],
+                                  name_changer=row[4], email_changer=row[5], original_email_changer=row[5],
                                   name_sponsor=spon_name, email_sponsor=spon_email,)
                 uploads.save()
         cursor.close()
         
+        #change the email for all new uploads of people who are not authoritative
+        for p in People.objects.filter(authoritative=False):
+            for u in Uploads.objects.filter(timestamp__gte=latest_entry).filter(email_changer=p.original_email):
+                u.email_changer = p.email
+                u.save()
+                  
     def row_iter(self, cursor, size=1000):
         while True:
             rows = cursor.fetchmany(size)

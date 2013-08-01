@@ -3,7 +3,8 @@ from django.core.management.base import NoArgsCommand
 from datetime import timedelta
 from django.utils import timezone
 from uploads.common.launchpad import lp_login as lp
-import re
+from django.conf import settings
+import os, re, random
 
 class Command(NoArgsCommand):
     help = "Create entry in people table if new LP id is found in uploads table."
@@ -11,36 +12,29 @@ class Command(NoArgsCommand):
     def import_people(self):
         blacklist = ['katie', 'ps-jenkins', 'ubuntu-langpack',
                      'kubuntu-members', '']
-        
 
-        import os, random
-        from django.conf import settings
-        
-        ###CHECK IF DD
         debian_devs_email_file = os.path.join(settings.PROJECT_PATH, 'debian-emails')
         debian_devs_email_set = set()
         with open(debian_devs_email_file) as f:
             for email in f:
                 debian_devs_email_set.add(email.strip())
-                
-                
+                                
         emails = Uploads.objects.values_list('email_changer', flat=True).distinct()
-        for email in emails.exclude(email_changer__in=blacklist): #does this matter
-            first_ul = Uploads.objects.filter(email_changer=email).order_by('timestamp')[0]
-            last_ul = Uploads.objects.filter(email_changer=email).order_by('timestamp').reverse()[0]
+        for email in emails.exclude(email_changer__in=blacklist):
+            first_ul = Uploads.objects.filter(email_changer=email).earliest('timestamp')
+            last_ul = Uploads.objects.filter(email_changer=email).latest('timestamp')
 
-            ###CHECK IF DD
             if email in debian_devs_email_set or re.search(r"@debian\.org", email):
                 debian_dev = True
             else:
                 debian_dev = False
                 
-            ###SET CONTROL GROUP
             if random.randint(1,10) > 8:
                 control_group = True
             else:
                 control_group = False
-            obj, created = People.objects.get_or_create(email=email,
+                
+            person, created = People.objects.get_or_create(original_email=email,
                                                         defaults={
                                                         'name':last_ul.name_changer,
                                                         'email':last_ul.email_changer,
@@ -49,9 +43,12 @@ class Command(NoArgsCommand):
                                                         'ubuntu_dev': debian_dev, 
                                                         'control_group': control_group
                                                         })
+
             if not created:
-                obj.control_group = control_group
-                obj.save()
+                person.first_upload = first_ul
+                person.last_upload = last_ul
+                person.ubuntu_dev = person.ubuntu_dev or debian_dev
+                person.save()
             
     def total_uploads(self):
         for p in People.objects.all():
