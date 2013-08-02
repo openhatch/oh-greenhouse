@@ -49,22 +49,10 @@ class Command(NoArgsCommand):
                                                         'ubuntu_dev': debian_dev, 
                                                         'control_group': control_group
                                                         })
-            print obj
             if not created:
                 obj.control_group = control_group
                 obj.save()
             
-    def check_is_active(self):
-        for p in People.objects.all():
-            last_ul = Uploads.objects.filter(email_changer=p.email).order_by('timestamp').reverse()[0].timestamp
-            cutoff_date = timezone.now()-timedelta(days=4*30)
-            if last_ul < cutoff_date and p.is_active is not False:
-                p.is_active = False
-                p.save()
-            elif last_ul > cutoff_date and p.is_active is not True:
-                p.is_active = True
-                p.save()
-
     def total_uploads(self):
         for p in People.objects.all():
             all_uploads = Uploads.objects.filter(email_changer=p.email)
@@ -94,7 +82,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         self.import_people()
-        self.check_is_active()
+        #self.check_is_active()
         self.total_uploads()
         self.last_seen()
         #self.is_ubuntu_dev()
