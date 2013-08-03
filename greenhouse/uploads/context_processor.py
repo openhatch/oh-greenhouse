@@ -6,6 +6,6 @@ def user_context(request):
     if bool(request.user.groups.filter(name__in=allowed_groups)):
         in_group = True
     else:
-        in_group = False 
+        in_group = False
 
     return {'in_allowed_group': in_group}

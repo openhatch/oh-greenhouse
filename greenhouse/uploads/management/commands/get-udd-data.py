@@ -1,5 +1,6 @@
 import subprocess
-import sys, os
+import sys
+import os
 import urllib
 
 from django.core.management.base import NoArgsCommand
@@ -9,6 +10,7 @@ import psycopg2 as db
 URL = "http://alioth.debian.org/~asb/udd/ubuntu_upload_history.sql"
 LOCAL_FILE = os.path.join(settings.TEMP_PATH, "udd.sql")
 UPDATED_FILE = os.path.join(settings.TEMP_PATH, "new-udd.sql")
+
 
 class Command(NoArgsCommand):
     help = "Update uploads data from UDD."
@@ -37,15 +39,15 @@ class Command(NoArgsCommand):
         cursor = conn.cursor()
         conn.set_isolation_level(0)
         cursor.execute("DROP DATABASE IF EXISTS " + dbinfo['NAME'])
-        cursor.execute("CREATE DATABASE " + dbinfo['NAME'] + 
+        cursor.execute("CREATE DATABASE " + dbinfo['NAME'] +
                        " WITH TEMPLATE=template0 ENCODING 'SQL_ASCII'")
         conn.commit()
         cursor.close()
         conn.close()
 
         conn = db.connect(host=dbinfo['HOST'], dbname=dbinfo['NAME'],
-                  user=dbinfo['USER'], password=dbinfo['PASSWORD'],
-                  port=dbinfo['PORT'] or 5432)
+                          user=dbinfo['USER'], password=dbinfo['PASSWORD'],
+                          port=dbinfo['PORT'] or 5432)
         cursor = conn.cursor()
         cursor.execute("CREATE EXTENSION IF NOT EXISTS debversion")
         conn.commit()
@@ -59,4 +61,3 @@ class Command(NoArgsCommand):
                     '-d', dbinfo['NAME'],
                     '-f', new_script]
         subprocess.call(psql_cmd, env=psql_env)
-

@@ -30,7 +30,7 @@ def run_cmd(cmd, interval):
     stamp_file = os.path.join(stamp_dir, "%s.stamp" % cmd)
     lock_file = os.path.join(stamp_dir, "%s.lock" % cmd)
     if not os.path.exists(stamp_file) or datetime.datetime.utcfromtimestamp(
-      os.path.getmtime(stamp_file)) + interval < datetime.datetime.now():
+       os.path.getmtime(stamp_file)) + interval < datetime.datetime.now():
         f = lock_path(lock_file)
         if f:
             management.call_command(cmd)
