@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.comments.models import Comment
 
+
 class UDD(models.Model):
-    connection_name='udd'
+    connection_name = 'udd'
     source = models.TextField()
     version = models.TextField()
     date = models.DateTimeField(blank=True, primary_key=True)
@@ -28,10 +29,11 @@ class UDD(models.Model):
         unique_together = ('source', 'version')
         managed = False
 
+
 class People(models.Model):
-    connection_name='default'
+    connection_name = 'default'
     name = models.TextField(blank=True)
-    email = models.EmailField(db_index=True) 
+    email = models.EmailField(db_index=True)
     original_email = models.EmailField(unique=True)
     first_upload = models.ForeignKey('Uploads', related_name='+')
     total_uploads = models.IntegerField(blank=True, default=0)
@@ -42,7 +44,7 @@ class People(models.Model):
     contacted = models.BooleanField(default=False)
     control_group = models.BooleanField(default=False)
     authoritative = models.BooleanField(default=True)
-    
+
     def merge(self, other):
         self.email = other.email
         self.authoritative = False
@@ -54,14 +56,15 @@ class People(models.Model):
             other.last_upload = self.last_upload
         if self.ubuntu_dev:
             other.ubuntu_dev = True
-        if self.notes:   
-            other.notes += "\nnotes from merged identity with email " + self.original_email + "\n" + self.notes
+        if self.notes:
+            other.notes = ''.join(["\nnotes from merged identity with email ",
+                                   self.original_email, "\n", self.notes])
         for contact in self.contacts.all():
             other.contacts.add(contact)
-            
+
         self.save()
         other.save()
-        
+
         for upload in Uploads.objects.filter(email_changer=self.email):
             upload.email_changer = other.email
             upload.save()
@@ -69,8 +72,9 @@ class People(models.Model):
     class Meta:
         db_table = u'people'
 
+
 class Uploads(models.Model):
-    connection_name='default'
+    connection_name = 'default'
     timestamp = models.DateTimeField(null=True, blank=True)
     release = models.TextField(blank=True)
     package = models.TextField(blank=True)
@@ -85,8 +89,8 @@ class Uploads(models.Model):
         db_table = u'uploads'
         unique_together = ('package', 'version')
 
+
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
- 

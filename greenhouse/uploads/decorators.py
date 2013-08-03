@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
 
+
 def group_perm_required():
     """
     An extension of the user_passes_test decorator that simplifies
