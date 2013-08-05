@@ -9,6 +9,7 @@ from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.signals import comment_was_posted
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.dispatch import receiver
 from django.utils import timezone
@@ -304,7 +305,7 @@ def delete_comment(request, email, comment_id):
         comment.save()
         msg = "Successfully deleted contact"
         messages.success(request, msg)
-        return HttpResponseRedirect('/contributors/' + email)
+        return HttpResponseRedirect(reverse('person_detail', args=(email,)))
 
 
 def unify_identities(request):
@@ -320,4 +321,4 @@ def unify_identities(request):
         msg = ' '.join(["Successful unification of", merge_from_email,
                         "into", merge_into_email])
         messages.success(request, msg)
-        return HttpResponseRedirect('/contributors/' + merge_into_email)
+        return HttpResponseRedirect(reverse('person_detail', args=(merge_into_email,)))
