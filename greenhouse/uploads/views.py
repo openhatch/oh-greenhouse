@@ -301,8 +301,7 @@ def on_contact_saved(sender, comment=None, request=None, **kwargs):
 def delete_comment(request, email, comment_id):
     if request.POST:
         comment = get_object_or_404(comments.get_model(), id=comment_id)
-        comment.is_removed = True
-        comment.save()
+        comment.delete()
         msg = "Successfully deleted contact"
         messages.success(request, msg)
         return HttpResponseRedirect(reverse('person_detail', args=(email,)))
