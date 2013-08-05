@@ -302,6 +302,8 @@ def delete_comment(request, email, comment_id):
         comment = get_object_or_404(comments.get_model(), id=comment_id)
         comment.is_removed = True
         comment.save()
+        msg = "Successfully deleted contact"
+        messages.success(request, msg)
         return HttpResponseRedirect('/contributors/' + email)
 
 
