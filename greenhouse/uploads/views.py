@@ -298,10 +298,11 @@ def on_contact_saved(sender, comment=None, request=None, **kwargs):
 
 
 def delete_comment(request, email, comment_id):
-    comment = get_object_or_404(comments.get_model(), id=comment_id)
-    comment.is_removed = True
-    comment.save()
-    return HttpResponseRedirect('/contributors/' + email)
+    if request.POST:
+        comment = get_object_or_404(comments.get_model(), id=comment_id)
+        comment.is_removed = True
+        comment.save()
+        return HttpResponseRedirect('/contributors/' + email)
 
 
 def unify_identities(request):
