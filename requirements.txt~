@@ -1,6 +1,0 @@
-Django==1.5
-psycopg2==2.4.5
-south==0.8.1
-launchpadlib==1.9.12
-django-openid-auth==0.5
-distro-info==0.10
