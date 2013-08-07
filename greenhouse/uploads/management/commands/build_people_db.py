@@ -30,7 +30,7 @@ class Command(NoArgsCommand):
             'email_changer', flat=True).distinct()
         for email in emails.exclude(email_changer__in=blacklist):
             first_ul = Uploads.objects.filter(
-                email_changer=email).earliest('timestamp')
+                email_changer=email).order_by('timestamp')[0]
             last_ul = Uploads.objects.filter(
                 email_changer=email).latest('timestamp')
 
