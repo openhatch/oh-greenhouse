@@ -26,20 +26,17 @@ def months(months):
 
 
 def group(type):
-    base = People.objects.filter(
-        control_group=False).filter(authoritative=True).prefetch_related(
+    base = People.objects.filter(control_group=False).filter(
+        authoritative=True).filter(ubuntu_dev=False).prefetch_related(
         "first_upload").prefetch_related("last_upload")
     active = base.filter(last_upload__timestamp__gte=months(4))
     types = {
-        'first_timers': base.filter(
-            ubuntu_dev=False).filter(first_upload__timestamp__gte=months(3)),
-        'experienced': active.filter(
-            ubuntu_dev=False).filter(total_uploads__gte=40),
+        'first_timers': base.filter(first_upload__timestamp__gte=months(3)),
+        'experienced': active.filter(total_uploads__gte=40),
         'inactive': base.filter(total_uploads__gte=5).filter(
             last_upload__timestamp__gt=months(12)).filter(
             last_upload__timestamp__lt=months(2)),
-        'potential': active.filter(ubuntu_dev=False).filter(
-            total_uploads__gte=40).filter(
+        'potential': active.filter(total_uploads__gte=40).filter(
             first_upload__timestamp__lte=months(6)),
         'recent': base.filter(last_upload__timestamp__gte=months(2)),
         }
@@ -65,31 +62,6 @@ def suggestions(email):
         return 'This person should apply for Debian Developer status'
     else:
         return 'This person does not fall under any of the categories'
-
-
-@group_perm_required()
-def first_timers(request):
-    output = []
-
-    from collections import Counter
-    releases = Counter()
-
-    for p in group('first_timers'):
-        if p.total_uploads < 5:
-            color = "lt5"
-        if 5 <= p.total_uploads < 10:
-            color = "gt5"
-        if 10 <= p.total_uploads < 20:
-            color = "gt10"
-        if 20 <= p.total_uploads < 50:
-            color = "gt20"
-        if p.total_uploads >= 50:
-            color = "gt50"
-        ul_info = {'p': p,
-                   'color': color}
-        output.append(ul_info)
-        releases[p.first_upload.release] += 1
-    return render(request, 'first_timers.html', {'output': output})
 
 
 @group_perm_required()
@@ -175,33 +147,6 @@ def edit_person(request, email):
                                            'email': person.email})
     return render(request, 'edit_person.html', {'person': person,
                                                 'person_form': person_form})
-
-
-@group_perm_required()
-def recent_contributors(request):
-    recent_contributors = []
-    for p in group('recent'):
-        recent_contributors += [p]
-    return render(request, 'recent_contributors.html',
-                  {'recent_contributors': recent_contributors})
-
-
-@group_perm_required()
-def lost_contributors(request):
-    lost_contributors = []
-    for p in group("inactive"):
-        lost_contributors += [p]
-    return render(request, 'lost_contributors.html',
-                  {'lost_contributors': lost_contributors})
-
-
-@group_perm_required()
-def potential_devs(request):
-    potential_devs = []
-    for p in group("potential"):
-        potential_devs += [p]
-    return render(request, 'potential_devs.html',
-                  {'potential_devs': potential_devs})
 
 
 def contacted(request, email):
@@ -320,4 +265,5 @@ def unify_identities(request):
         msg = ' '.join(["Successful unification of", merge_from_email,
                         "into", merge_into_email])
         messages.success(request, msg)
-        return HttpResponseRedirect(reverse('person_detail', args=(merge_into_email,)))
+        return HttpResponseRedirect(reverse('person_detail',
+                                            args=(merge_into_email,)))
