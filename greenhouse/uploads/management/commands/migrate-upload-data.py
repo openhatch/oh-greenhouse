@@ -10,17 +10,16 @@ class Command(NoArgsCommand):
     help = "Migrate upload data from UDD to django managed database."
 
     def import_uploads(self):
-        greatest = []
         CHUNK_SIZE = 5000
         try:
-            now = UDD.objects.order_by('-date').filter(
+            now = UDD.objects.order_by('date').filter(
                 date__lte=timezone.now()).reverse()[0].date
             current = latest = Uploads.objects.latest('timestamp').timestamp
         except ObjectDoesNotExist:
-            current = latest = UDD.objects.order_by('date').date
+            current = latest = UDD.objects.order_by('date')[0].date
         while current < now:
             for u in UDD.objects.order_by(
-                    '-date').filter(date__gt=current)[:CHUNK_SIZE]:
+                    'date').filter(date__gt=current)[:CHUNK_SIZE]:
                 if u.date < now:
                     uploads = Uploads(timestamp=u.date,
                                       release=u.distribution,
