@@ -1,15 +1,13 @@
 import os
 from django.conf import global_settings
 
-settings_dir = os.path.dirname(__file__)
-PROJECT_PATH = os.path.abspath(os.path.dirname(settings_dir))
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.abspath(os.path.dirname(SETTINGS_DIR))
 DATA_PATH = os.path.join(PROJECT_PATH, "data")
 CACHE_PATH = os.path.join(PROJECT_PATH, "lp_data/cache")
 TEMP_PATH = os.path.join(PROJECT_PATH, "temp_data")
 if not os.path.exists(TEMP_PATH):
     os.makedirs(TEMP_PATH)
-
-# Django settings for myproject project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -20,10 +18,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-# Dotcloud environment vs development
-# 1) Log directory is differnt
-# 2) Database credentials are different
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -83,7 +77,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -93,7 +87,7 @@ SECRET_KEY = '!^@y642$s-)!5e#z36i@ed5*o__1&amp;oq+)c=ov81e1r(bit^)$*'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,16 +100,17 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'greenhouse.urls'
+ROOT_URLCONF = 'greenhouse-project-settings.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'greenhouse.wsgi.application'
+WSGI_APPLICATION = 'greenhouse-project-settings.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like "/home/html/django_templates"
+    # or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	os.path.join(PROJECT_PATH, 'templates/'),
+    os.path.join(PROJECT_PATH, 'templates/'),
 )
 
 INSTALLED_APPS = (
@@ -131,6 +126,11 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'uploads',
     'south',
+    'django_openid_auth',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'uploads.context_processor.user_context',
 )
 
 # OpenID and Launchpad intigration
@@ -160,7 +160,7 @@ ALLOWED_LAUNCHPAD_TEAMS = ['ubuntu-developer-advisory-team',
                            'developer-membership-board',
                            'communitycouncil',
                            'canonical-community',
-                           'greenhouse']
+                           'greenhouse', ]
 
 AUTH_PROFILE_MODULE = "uploads.UserProfile"
 
@@ -173,7 +173,8 @@ try:
     INSTALLED_APPS += DEBUG_APPS
     MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
 except ImportError:
-    logging.warning("No local_settings.py were found. See INSTALL for instructions.")
+    logging.warning("No local_settings.py were found. \
+                    See INSTALL for instructions.")
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -185,7 +186,8 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s \
+                       %(process)d %(thread)d %(message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -193,8 +195,8 @@ LOGGING = {
     },
     'handlers': {
         'null': {
-            'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
         },
         'console': {
             'level': 'DEBUG',
@@ -206,7 +208,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
             'filename': log_file_dir,
-            'maxBytes': 1024*1024*25, # 25 MB
+            'maxBytes': 1024*1024*25,  # 25 MB
             'backupCount': 5,
         },
         'mail_admins': {
@@ -238,5 +240,3 @@ LOGGING = {
         }
     }
 }
-
-
