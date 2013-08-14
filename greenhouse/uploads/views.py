@@ -7,12 +7,14 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.comments import Comment
 from django.contrib.comments.signals import comment_was_posted
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.dispatch import receiver
 from django.utils import timezone
+from django.db.models import Q
 
 from distro_info import UbuntuDistroInfo
 
@@ -176,7 +178,6 @@ def user_profile(request, user):
         "object_repr", flat=True).distinct()
     return render(request, 'user_profile.html',
                   {'profile': profile,
-                   'actions': actions,
                    'edited_contribs': edited_contribs})
 
 
@@ -194,13 +195,14 @@ def access_denied(request, redirect):
 
 
 def index(request):
-    return render(request, 'index.html', dashboard())
+    return render(request, 'index.html', dashboard(request))
 
 
-def dashboard():
+def dashboard(request):
     first_timers = []
     experienced = []
     inactive = []
+    contacted_filter = set()
 
     first_timers_qs = group('first_timers').select_related(
         'contacts').order_by('last_upload__timestamp').reverse()
@@ -208,31 +210,41 @@ def dashboard():
         'contacts').order_by('last_upload__timestamp').reverse()
     inactive_qs = group('inactive').select_related(
         'contacts').order_by('last_upload__timestamp').reverse()
+    actions = LogEntry.objects.filter(user_id=request.user.id)
+    contacted_qs = Comment.objects.for_model(People).order_by('submit_date')
 
     for p in first_timers_qs:
-        if (len(first_timers) < 20 and not p.contacts.all()):
+        if (len(first_timers) < 5 and not p.contacts.all()):
             first_timers.append(p)
     for p in experienced_qs:
         if p.contacts.all():
             recent_c = p.contacts.all().reverse()[0].submit_date
         else:
             recent_c = None
-        if (len(experienced) < 20 and (recent_c is None or
+        if (len(experienced) < 5 and (recent_c is None or
             recent_c < Uploads.objects.filter(
                 email_changer=p.email).order_by("timestamp")[39].timestamp)):
             experienced.append(p)
-
     for p in inactive_qs:
         if p.contacts.all():
             recent_c = p.contacts.all().reverse()[0].submit_date
         else:
             recent_c = None
-        if len(inactive) < 20 and (recent_c is None or
+        if len(inactive) < 5 and (recent_c is None or
            recent_c < p.last_upload.timestamp):
                 inactive.append(p)
+    for c in contacted_qs:
+        if (len(contacted_filter)) < 5:
+            contacted_filter.add(c.object_pk)
+    query = Q()
+    for object_pk in contacted_filter:
+        query |= Q(id=object_pk)
+    contacted = People.objects.filter(query) if query else []
     return {'first_timers': first_timers,
             'experienced': experienced,
-            'inactive': inactive}
+            'inactive': inactive,
+            'contacted': contacted,
+            'actions': actions,}
 
 
 @receiver(comment_was_posted)

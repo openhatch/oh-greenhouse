@@ -28,6 +28,13 @@ be applying for developer status.
     {% endfor %}
 </div>
 
+<div class='dashboard-box span4'>
+    <h3>Was recently contacted:</h3>
+    {% for p in contacted %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</li>
+    {% endfor %}
+</div>
+
 </div>
 
 <div id='action_log'>
