@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import datetime
-from uploads.common.utils import run_cmd
+from greenhouse.common.utils import run_cmd
 from django.core.management.base import NoArgsCommand
 
 

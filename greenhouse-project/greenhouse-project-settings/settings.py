@@ -124,13 +124,13 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'uploads',
+    'greenhouse',
     'south',
     'django_openid_auth',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'uploads.context_processor.user_context',
+    'greenhouse.context_processor.user_context',
 )
 
 # OpenID and Launchpad intigration
@@ -162,9 +162,9 @@ ALLOWED_LAUNCHPAD_TEAMS = ['ubuntu-developer-advisory-team',
                            'canonical-community',
                            'greenhouse', ]
 
-AUTH_PROFILE_MODULE = "uploads.UserProfile"
+AUTH_PROFILE_MODULE = "greenhouse.UserProfile"
 
-DATABASE_ROUTERS = ['uploads.router.DBRouter']
+DATABASE_ROUTERS = ['greenhouse.router.DBRouter']
 
 DEBUG_APPS = ()
 DEBUG_MIDDLEWARE_CLASSES = ()

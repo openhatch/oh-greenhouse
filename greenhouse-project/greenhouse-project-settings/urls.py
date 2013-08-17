@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
-from uploads import views
+from greenhouse import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin

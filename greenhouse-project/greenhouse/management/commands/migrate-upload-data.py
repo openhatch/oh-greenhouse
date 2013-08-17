@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import connections
 from django.utils import timezone
 import gc
-from uploads.models import UDD, People, Uploads
+from greenhouse.models import UDD, People, Uploads
 
 
 class Command(NoArgsCommand):

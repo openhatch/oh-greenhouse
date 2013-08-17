@@ -7,8 +7,8 @@ from django.core.management.base import NoArgsCommand
 from django.utils import timezone
 from django.conf import settings
 
-from uploads.models import Uploads, People
-from uploads.common.launchpad import lp_login as lp
+from greenhouse.models import Uploads, People
+from greenhouse.common.launchpad import lp_login as lp
 
 
 class Command(NoArgsCommand):

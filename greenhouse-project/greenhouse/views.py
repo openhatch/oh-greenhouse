@@ -18,9 +18,9 @@ from django.db.models import Q
 
 from distro_info import UbuntuDistroInfo
 
-from uploads.decorators import group_perm_required
-from uploads.models import Uploads, People, UserProfile
-from uploads.forms import NotesForm, EditContrib
+from greenhouse.decorators import group_perm_required
+from greenhouse.models import Uploads, People, UserProfile
+from greenhouse.forms import NotesForm, EditContrib
 
 
 def months(months):
