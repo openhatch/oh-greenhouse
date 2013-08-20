@@ -1,16 +1,62 @@
 import os
+import json
 from django.conf import global_settings
 
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.abspath(os.path.dirname(SETTINGS_DIR))
-DATA_PATH = os.path.join(PROJECT_PATH, "data")
-CACHE_PATH = os.path.join(PROJECT_PATH, "lp_data/cache")
-TEMP_PATH = os.path.join(PROJECT_PATH, "temp_data")
-if not os.path.exists(TEMP_PATH):
-    os.makedirs(TEMP_PATH)
+ 
+try:
+    with open('/home/dotcloud/environment.json') as f:
+        env = json.load(f)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'default',
+                'USER': env['DOTCLOUD_DB_SQL_LOGIN'],
+                'PASSWORD': env['DOTCLOUD_DB_SQL_PASSWORD'],
+                'HOST': env['DOTCLOUD_DB_SQL_HOST'],
+                'PORT': int(env['DOTCLOUD_DB_SQL_PORT']),
+            },
+            'udd': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'udd',
+                'USER': 'public-udd-mirror',
+                'PASSWORD': 'public-udd-mirror',
+                'HOST': 'public-udd-mirror.xvm.mit.edu',
+                'PORT': 465,
+            }
+        }
+        log_file_dir = '/var/log/supervisor/greenhouse.log'
+        DEBUG = True
+        TEMPLATE_DEBUG = DEBUG
+        DEBUG_MIDDLEWARE_CLASSES = ()
+        DEBUG_APPS = ()
+except IOError:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'default',
+            'USER': 'daveeloo',
+            'PASSWORD': 'password',
+            'HOST': '',
+            'PORT': '',
+        },
+        'udd': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'udd',
+            'USER': 'public-udd-mirror',
+            'PASSWORD': 'public-udd-mirror',
+            'HOST': 'public-udd-mirror.xvm.mit.edu',
+            'PORT': 465,
+        }
+    }
+    log_file_dir = os.path.join(PROJECT_PATH, 'logs/')
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    DEBUG_MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    DEBUG_APPS = ('debug_toolbar',)
+    INTERNAL_IPS = ('127.0.0.1',)
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 STATIC_SERVE = True
 
 ADMINS = (
@@ -128,6 +174,8 @@ INSTALLED_APPS = (
     'south',
     'django_openid_auth',
 )
+INSTALLED_APPS += DEBUG_APPS
+MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'greenhouse.context_processor.user_context',
@@ -165,16 +213,6 @@ ALLOWED_LAUNCHPAD_TEAMS = ['ubuntu-developer-advisory-team',
 AUTH_PROFILE_MODULE = "greenhouse.UserProfile"
 
 DATABASE_ROUTERS = ['greenhouse.router.DBRouter']
-
-DEBUG_APPS = ()
-DEBUG_MIDDLEWARE_CLASSES = ()
-try:
-    from local_settings import *
-    INSTALLED_APPS += DEBUG_APPS
-    MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
-except ImportError:
-    logging.warning("No local_settings.py were found. \
-                    See INSTALL for instructions.")
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
