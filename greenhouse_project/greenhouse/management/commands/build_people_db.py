@@ -8,7 +8,6 @@ from django.utils import timezone
 from django.conf import settings
 
 from greenhouse.models import Uploads, People
-from greenhouse.common.launchpad import lp_login as lp
 
 
 class Command(NoArgsCommand):
