@@ -21,15 +21,6 @@
             </li>
         </ul>
     </div>
-    <br>
-    <div id='action_log'>
-        <h2>Most Recent Actions:</h2>
-        <ul>{% for action in actions|slice:":20" %}
-            <li>{{ action.action_time|date:"D d M Y" }}:
-                <a href="/contributors/{{ action.object_repr }}">
-                {{ action.change_message }}</a></li>
-        {% endfor %}</ul>
-    </div>
 </div>
 
 {% endblock %}

@@ -6,7 +6,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<title>{% block title %}{% trans "Greenhouse Overview" %}{% endblock %}</title>
+	<title>{% block title %}{% trans "Greenhouse" %}{% endblock %}</title>
 	
 	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
 	
@@ -25,18 +25,10 @@
 <div id="wrapper">
 
 <div id="header">
-	<div id="extheader">
-		<ul>
-		<li><a href="http://www.debian.org">Debian.org</a></li>
-		<li><a href="http://wiki.debian.org/Community">Community</a></li>
-		<li><a href="http://www.debian.org/support">Support</a></li>
-		<li><a href="http://www.debian.org/partners/">Partners</a></li>
-		</ul>
-	</div>
 	
 	<div id="mainheader">
 		<a id="sitetitle" href="{% url 'home' %}" class="quiet">
-			<span id="sitename">{% trans "Greenhouse Overview" %}</span>
+			<span id="sitename">{% trans "Greenhouse" %}</span>
 		</a>
 	
 		<span id="userdata">
@@ -72,10 +64,6 @@
 			{% block content %}{% endblock %}
 	</div>
 
-{% if in_allowed_group %}
-		{% include "sidebar.html" %}
-{% endif %}
-
 </div>
 
 <div class="bottom"></div>
@@ -83,19 +71,11 @@
 <div id="footer">
 	<div id="footnav">
 		<ul>
-		<li class="toplevel"><a href="{% url 'home' %}">{% trans "Greenhouse Overview" %}</a></li>
+		<li class="toplevel"><a href="{% url 'home' %}">{% trans "Greenhouse" %}</a></li>
 		<li><a href="https://github.com/openhatch/oh-greenhouse/issues?state=open" target="_blank">{% trans "Bugs" %}</a></li>
 		<li><a href="http://github.com/openhatch/oh-greenhouse" target="_blank">{% trans "Code" %}</a></li>
 		</ul>
-	</div>
-	
-	<div id="copyright">
-		&copy; 2013 Debian Project
-
-	</div>
 </div>
-
+</div>
 </body>
-
 </html>
-
