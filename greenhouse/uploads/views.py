@@ -199,6 +199,7 @@ def index(request):
 
 
 def dashboard(request):
+    MAX_PPL_IN_VIEW = 5
     first_timers = []
     experienced = []
     inactive = []
@@ -214,14 +215,14 @@ def dashboard(request):
     contacted_qs = Comment.objects.for_model(People).order_by('submit_date')
 
     for p in first_timers_qs:
-        if (len(first_timers) < 5 and not p.contacts.all()):
+        if len(first_timers) < MAX_PPL_IN_VIEW and not p.contacts.all():
             first_timers.append(p)
     for p in experienced_qs:
         if p.contacts.all():
             recent_c = p.contacts.all().reverse()[0].submit_date
         else:
             recent_c = None
-        if (len(experienced) < 5 and (recent_c is None or
+        if (len(experienced) < MAX_PPL_IN_VIEW and (recent_c is None or
             recent_c < Uploads.objects.filter(
                 email_changer=p.email).order_by("timestamp")[39].timestamp)):
             experienced.append(p)
@@ -230,11 +231,11 @@ def dashboard(request):
             recent_c = p.contacts.all().reverse()[0].submit_date
         else:
             recent_c = None
-        if len(inactive) < 5 and (recent_c is None or
+        if len(inactive) < MAX_PPL_IN_VIEW and (recent_c is None or
            recent_c < p.last_upload.timestamp):
                 inactive.append(p)
     for c in contacted_qs:
-        if (len(contacted_filter)) < 5:
+        if len(contacted_filter) < MAX_PPL_IN_VIEW:
             contacted_filter.add(c.object_pk)
     query = Q()
     for object_pk in contacted_filter:
@@ -244,7 +245,8 @@ def dashboard(request):
             'experienced': experienced,
             'inactive': inactive,
             'contacted': contacted,
-            'actions': actions,}
+            'actions': actions,
+            }
 
 
 @receiver(comment_was_posted)
