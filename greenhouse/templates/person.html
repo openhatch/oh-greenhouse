@@ -51,7 +51,7 @@
         	| <a id="unify" title="If this person already exists under another identity
         	click here to merge the identities"> [unify duplicate identity] </a>
         </li>
-        <li><b>DDPO:</b><a href="http://qa.debian.org/developer.php?email=paultag@ubuntu.com"> {{person.name}}</a></li>   
+        <li><b>DDPO:</b><a href="http://qa.debian.org/developer.php?email={{person.email}}"> {{person.name}}</a></li>   
         <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
         <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
         <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
@@ -94,7 +94,7 @@
     </tr>
     {% for ul in recent_uploads %}
     <tr>
-        <td><a href="https://launchpad.net/ubuntu/+source/{{ ul.package }}/{{ ul.version }}">{{ ul.package }}</a></td>
+        <td><a href="http://packages.qa.debian.org/{{ ul.package }}">{{ ul.package }}</a></td>
         <td>{{ ul.version }}</d>
         <td>{{ ul.timestamp }}</td>
     </tr>
