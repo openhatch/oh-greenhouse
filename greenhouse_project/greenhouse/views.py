@@ -18,9 +18,9 @@ from django.db.models import Q
 
 from distro_info import UbuntuDistroInfo
 
-from uploads.decorators import group_perm_required
-from uploads.models import Uploads, People, UserProfile
-from uploads.forms import NotesForm, EditContrib
+from greenhouse.decorators import group_perm_required
+from greenhouse.models import Uploads, People, UserProfile
+from greenhouse.forms import NotesForm, EditContrib
 
 
 def months(months):
@@ -86,7 +86,7 @@ def person_detail(request, email):
     else:
         notes_form = NotesForm(initial={'notes': person.notes})
 
-    return render(request, 'person.html', {'person': person,
+    return render(request, 'greenhouse/person.html', {'person': person,
                                            'recent_uploads': recent_uploads,
                                            'ppu_candidates': ppu_candidates,
                                            'notes_form': notes_form,
@@ -147,7 +147,7 @@ def edit_person(request, email):
     else:
         person_form = EditContrib(initial={'email': email,
                                            'email': person.email})
-    return render(request, 'edit_person.html', {'person': person,
+    return render(request, 'greenhouse/edit_person.html', {'person': person,
                                                 'person_form': person_form})
 
 
@@ -176,7 +176,7 @@ def user_profile(request, user):
     actions = LogEntry.objects.filter(user_id=profile.user_id)
     edited_contribs = actions.order_by('object_repr').values_list(
         "object_repr", flat=True).distinct()
-    return render(request, 'user_profile.html',
+    return render(request, 'greenhouse/user_profile.html',
                   {'profile': profile,
                    'edited_contribs': edited_contribs})
 
@@ -195,7 +195,7 @@ def access_denied(request, redirect):
 
 
 def index(request):
-    return render(request, 'index.html', dashboard(request))
+    return render(request, 'greenhouse/index.html', dashboard(request))
 
 
 def dashboard(request):

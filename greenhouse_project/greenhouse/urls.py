@@ -1,13 +1,7 @@
-from django.conf import settings
 from django.conf.urls import patterns, include, url
-from uploads import views
+from greenhouse import views
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
-
-urlpatterns = patterns(
-    '',
+urlpatterns = patterns('',
     url(r'^openid/', include('django_openid_auth.urls')),
     url(r'^logout$', views.site_logout, name='logout'),
     url(r'^denied(.+)', views.access_denied, name='denied'),
@@ -23,10 +17,3 @@ urlpatterns = patterns(
     url(r'^unify', views.unify_identities, name='unify_identities'),
     url(r'^comments/', include('django.contrib.comments.urls'))
 )
-
-if settings.STATIC_SERVE:
-    urlpatterns += patterns('',
-                            url(r'^media/(?P<path>.*)$',
-                                'django.views.static.serve',
-                                {'document_root': settings.MEDIA_ROOT}),
-                            )
