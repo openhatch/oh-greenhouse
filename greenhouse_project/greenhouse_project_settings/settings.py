@@ -23,7 +23,7 @@ try:
                 'USER': 'public-udd-mirror',
                 'PASSWORD': 'public-udd-mirror',
                 'HOST': 'public-udd-mirror.xvm.mit.edu',
-                'PORT': 5432,
+                'PORT': 465,
             }
         }
         log_file_dir = '/var/log/supervisor/greenhouse.log'
@@ -47,7 +47,7 @@ except IOError:
             'USER': 'public-udd-mirror',
             'PASSWORD': 'public-udd-mirror',
             'HOST': 'public-udd-mirror.xvm.mit.edu',
-            'PORT': 5432,
+            'PORT': 465,
         }
     }
     log_file_dir = os.path.join(PROJECT_PATH, 'logs/')
