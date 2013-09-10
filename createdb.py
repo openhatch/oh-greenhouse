@@ -1,6 +1,7 @@
 import MySQLdb
 import psycopg2
 import os
+from wsgi import *
 
 
 def create_dbs():
@@ -42,7 +43,7 @@ def create_dbs():
             con.set_isolation_level(0)
             cur = con.cursor()
             try:
-                cur.execute('CREATE DATABASE %s' % db_name)
+                cur.execute('CREATE DATABASE "%s"' % db_name)
             except psycopg2.ProgrammingError as detail:
                 print detail
                 print 'moving right along...'
