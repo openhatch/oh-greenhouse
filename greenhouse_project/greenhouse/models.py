@@ -30,56 +30,46 @@ class UDD(models.Model):
         managed = False
 
 
-class People(models.Model):
+class Person(models.Model):
     connection_name = 'default'
     name = models.TextField(blank=True)
     email = models.EmailField(db_index=True)
-    original_email = models.EmailField(unique=True)
-    first_upload = models.ForeignKey('Uploads', related_name='+')
-    total_uploads = models.IntegerField(blank=True, default=0)
-    last_upload = models.ForeignKey('Uploads', related_name='+')
-    ubuntu_dev = models.BooleanField(default=False)
+    exclude = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
     contacts = generic.GenericRelation(Comment, object_id_field="object_pk")
-    contacted = models.BooleanField(default=False)
     control_group = models.BooleanField(default=False)
-    authoritative = models.BooleanField(default=True)
+    authoritative_person = models.ForeignKey('self', null=True, default=None)
 
     def merge(self, other):
-        self.email = other.email
-        self.authoritative = False
+        self.authoritative_person = other
 
-        if self.first_upload.timestamp < other.first_upload.timestamp:
-            other.first_upload = self.first_upload
-        other.total_uploads += self.total_uploads
-        if self.last_upload.timestamp > other.last_upload.timestamp:
-            other.last_upload = self.last_upload
-        if self.ubuntu_dev:
-            other.ubuntu_dev = True
+        if self.exclude:
+            other.exclude = True
         if self.notes:
             other.notes = ''.join(["\nnotes from merged identity with email ",
-                                   self.original_email, "\n", self.notes])
+                                   self.email, "\n", self.notes])
         for contact in self.contacts.all():
             other.contacts.add(contact)
 
         self.save()
         other.save()
 
-        for upload in Uploads.objects.filter(email_changer=self.email):
-            upload.email_changer = other.email
+        for upload in Activity.objects.filter(person=self):
+            upload.person = other
             upload.save()
 
-class Uploads(models.Model):
+
+class Activity(models.Model):
     connection_name = 'default'
-    timestamp = models.DateTimeField(null=True, blank=True)
-    release = models.TextField(blank=True)
+    type = models.CharField(max_length=128)
+    subproject = models.CharField(max_length=128)
+    time = models.DateTimeField(null=True, blank=True)
+    
     package = models.TextField(blank=True)
     version = models.TextField(blank=True)
-    name_changer = models.TextField(blank=True)
-    email_changer = models.EmailField(db_index=True, blank=True)
-    original_email_changer = models.EmailField(blank=True)
-    name_sponsor = models.TextField(blank=True)
-    email_sponsor = models.EmailField(blank=True)
+
+    original_person = models.ForeignKey('Person', related_name='+', null=True)
+    person = models.ForeignKey('Person', related_name='+', null=True)
 
     class Meta:
         unique_together = ('package', 'version')
