@@ -69,10 +69,6 @@ class People(models.Model):
             upload.email_changer = other.email
             upload.save()
 
-    class Meta:
-        db_table = u'people'
-
-
 class Uploads(models.Model):
     connection_name = 'default'
     timestamp = models.DateTimeField(null=True, blank=True)
@@ -86,7 +82,6 @@ class Uploads(models.Model):
     email_sponsor = models.EmailField(blank=True)
 
     class Meta:
-        db_table = u'uploads'
         unique_together = ('package', 'version')
 
 
