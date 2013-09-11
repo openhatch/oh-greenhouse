@@ -7,7 +7,7 @@ from django.core.management.base import NoArgsCommand
 from django.utils import timezone
 from django.conf import settings
 
-from greenhouse.models import Uploads, People
+from greenhouse.models import Activity, People
 
 
 class Command(NoArgsCommand):
@@ -25,12 +25,12 @@ class Command(NoArgsCommand):
             for email in f:
                 debian_devs_email_set.add(email.strip())
 
-        emails = Uploads.objects.values_list(
+        emails = Activity.objects.values_list(
             'email_changer', flat=True).distinct()
         for email in emails.exclude(email_changer__in=blacklist):
-            first_ul = Uploads.objects.filter(
+            first_ul = Activity.objects.filter(
                 email_changer=email).order_by('timestamp')[0]
-            last_ul = Uploads.objects.filter(
+            last_ul = Activity.objects.filter(
                 email_changer=email).latest('timestamp')
 
             if email in debian_devs_email_set or re.search(r"@debian\.org",
@@ -64,7 +64,7 @@ class Command(NoArgsCommand):
 
     def total_uploads(self):
         for p in People.objects.all():
-            all_uploads = Uploads.objects.filter(email_changer=p.email)
+            all_uploads = Activity.objects.filter(email_changer=p.email)
             total_uploads = len(all_uploads)
             if p.total_uploads != total_uploads:
                 p.total_uploads = total_uploads
@@ -72,7 +72,7 @@ class Command(NoArgsCommand):
 
     def last_seen(self):
         for p in People.objects.all():
-            last_ul = Uploads.objects.filter(
+            last_ul = Activity.objects.filter(
                 email_changer=p.email).order_by('timestamp').reverse()[0]
             if p.last_upload != last_ul:
                 p.last_upload = last_ul

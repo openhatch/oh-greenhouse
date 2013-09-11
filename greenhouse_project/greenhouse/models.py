@@ -69,7 +69,7 @@ class Activity(models.Model):
     version = models.TextField(blank=True)
 
     original_person = models.ForeignKey('Person', related_name='+', null=True)
-    person = models.ForeignKey('Person', related_name='+', null=True)
+    person = models.ForeignKey('Person', related_name='activities', null=True)
 
     class Meta:
         unique_together = ('package', 'version')
