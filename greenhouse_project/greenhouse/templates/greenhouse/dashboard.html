@@ -9,29 +9,29 @@ be applying for developer status.
 
 <div class='dashboard-box span4'>
     <h3>New comers not greeted yet:</h3>
-    {% for p in first_timers|dictsortreversed:"first_upload.timestamp" %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.first_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</li>
+    {% for p in first_timers %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
     {% endfor %}
 </div>
 
 <div class='dashboard-box span4'>
     <h3>Have done 40 uploads but need to be contacted:</h3>
-    {% for p in experienced|dictsortreversed:"last_upload.timestamp" %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.total_uploads }} uploads</li>
+    {% for p in experienced %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.total }} uploads</li>
     {% endfor %}
 </div>
 
 <div class='dashboard-box span4'>
     <h3>Haven't done an upload since being contacted:</h3>
-    {% for p in inactive|dictsortreversed:"last_upload.timestamp" %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</li>
+    {% for p in inactive %}
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
     {% endfor %}
 </div>
 
 <div class='dashboard-box span4'>
     <h3>Was recently contacted:</h3>
     {% for p in contacted %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.last_upload.timestamp|date:"SHORT_DATE_FORMAT" }}</li>
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
     {% endfor %}
 </div>
 
