@@ -146,10 +146,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'greenhouse_project_settings.urls'
+ROOT_URLCONF = 'example_settings.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'greenhouse_project_settings.wsgi.application'
+WSGI_APPLICATION = 'example_settings.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates"

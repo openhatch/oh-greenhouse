@@ -1,6 +1,6 @@
 #!/bin/sh
 python createdb.py
-python greenhouse_project/manage.py syncdb --noinput
+python example_project/manage.py syncdb --noinput
 python mkadmin.py
 mkdir -p /home/dotcloud/data/media /home/dotcloud/data/static
-python greenhouse_project/manage.py collectstatic --noinput
+python example/manage.py collectstatic --noinput
