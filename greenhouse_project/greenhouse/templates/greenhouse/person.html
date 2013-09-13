@@ -3,131 +3,131 @@
 {% load comments %}
 
 {% block extrahead %}
-  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  	<style>
-  		#unify { cursor:pointer; }
-  	</style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<style>
+  #unify { cursor:pointer; }
+</style>
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
 
-      google.load('visualization', '1.0', {'packages':['corechart']});
+  google.load('visualization', '1.0', {'packages':['corechart']});
 
-      google.setOnLoadCallback(drawChart);
+  google.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+  function drawChart() {
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Release');
-      data.addColumn('number', 'Uploads');
-      data.addRows([
-        {% for field, value in uploads_per_release.items %}
-            ['{{ field }}', {{ value }}],
-        {% endfor %}
-      ]);
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Release');
+  data.addColumn('number', 'Uploads');
+  data.addRows([
+  {% for field, value in uploads_per_release.items %}
+  ['{{ field }}', {{ value }}],
+  {% endfor %}
+  ]);
 
-      var options = {'legend':'in',
-                     'width':600,
-                     'height':300,
-                     'pointSize':5,
-                     colors: ['#dd4814']};
+  var options = {'legend':'in',
+  'width':600,
+  'height':300,
+  'pointSize':5,
+  colors: ['#dd4814']};
 
-      var chart = new google.visualization.LineChart(document.getElementById('uploads_per_release_chart'));
-      chart.draw(data, options);
-    }
-    </script>
+  var chart = new google.visualization.LineChart(document.getElementById('uploads_per_release_chart'));
+  chart.draw(data, options);
+  }
+</script>
 {% endblock %}
 
 {% block content %}
 <h1>{{ person.name }} </h1><p>{{ suggestion|safe }}</p>
 
 <div class='main'>
-<div id='person_details'>
+  <div id='person_details'>
     <ul>
-        <li>
-        	<b>Email:</b> <a href="mailto:{{ person.email }}"> {{ person.email }}</a> 
-        	| <a id="unify" title="If this person already exists under another identity
-        	click here to merge the identities"> [unify duplicate identity] </a>
-        </li>
-        <li><b>DDPO:</b><a href="http://qa.debian.org/developer.php?email={{person.email}}"> {{person.name}}</a></li>   
-        <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
-        <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
-       <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
-        <li><b>Total uploads:</b> {{ person.activities.count }}</li>
-        {% if ppu_candidates %}
-        <li><b><abbr title="List of packages this person has done 5+ uploads of">DM Candidates:</abbr></b> 
-            {% for pkg in ppu_candidates %}
-            <a href="http://packages.qa.debian.org/{{ pkg }}">{{ pkg }}</a>, </li>
-            {% endfor %}
-        {% endif %}
+      <li>
+        <b>Email:</b> <a href="mailto:{{ person.email }}"> {{ person.email }}</a> 
+        | <a id="unify" title="If this person already exists under another identity
+        		       click here to merge the identities"> [unify duplicate identity] </a>
+      </li>
+      <li><b>DDPO:</b><a href="http://qa.debian.org/developer.php?email={{person.email}}"> {{person.name}}</a></li>   
+      <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
+      <li><b>Last Seen:</b> {{ person.latest }}</li>
+      <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
+      <li><b>Total uploads:</b> {{ person.activities.count }}</li>
+      {% if ppu_candidates %}
+      <li><b><abbr title="List of packages this person has done 5+ uploads of">DM Candidates:</abbr></b> 
+        {% for pkg in ppu_candidates %}
+        <a href="http://packages.qa.debian.org/{{ pkg }}">{{ pkg }}</a>, </li>
+      {% endfor %}
+      {% endif %}
 
     </ul>
     
-</div>
-<div id="unifier" title="Unify Identity" style="display:none">
-	<p>Type in the name of the person you think this identity is a duplicate of and press "Unify" to merge him/her: </p>
-	<datalist id="contributors">
-		{% for person in contributor_list %}
-			<option value="{{person.name}} &lt;{{person.email}}&gt;">
-		{% endfor %}
-	</datalist>
-	<center>
-		<form method="POST" action="/unify">
-			{% csrf_token %}
-			<input name="merge_from" type="hidden" value="{{person.email}}" />
-			<input name="merge_into" list="contributors" />
-			<input type="submit" value="Unify!"/>
-		</form>
-	</center>
-</div>
+  </div>
+  <div id="unifier" title="Unify Identity" style="display:none">
+    <p>Type in the name of the person you think this identity is a duplicate of and press "Unify" to merge him/her: </p>
+    <datalist id="contributors">
+      {% for person in contributor_list %}
+      <option value="{{person.name}} &lt;{{person.email}}&gt;">
+	{% endfor %}
+    </datalist>
+    <center>
+      <form method="POST" action="/unify">
+	{% csrf_token %}
+	<input name="merge_from" type="hidden" value="{{person.email}}" />
+	<input name="merge_into" list="contributors" />
+	<input type="submit" value="Unify!"/>
+      </form>
+    </center>
+  </div>
 
-<div id='recent_uploads'>
-<h2>Most recent uploads:</h2>
+  <div id='recent_uploads'>
+    <h2>Most recent uploads:</h2>
 
-<table>
-    <tr>
+    <table>
+      <tr>
         <th>Package</th>
         <th>Version</th>
         <th>Date</th>
-    </tr>
-    {% for ul in recent_uploads %}
-    <tr>
-        <td><a href="http://packages.qa.debian.org/{{ ul.package }}">{{ ul.package }}</a></td>
+      </tr>
+      {% for ul in recent_uploads %}
+      <tr>
+        <td><a href="http://packages.qa.debian.org/{{ ul.subproject }}">{{ ul.subproject }}</a></td>
         <td>{{ ul.version }}</td>
-        <td>{{ ul.timestamp }}</td>
-    </tr>
-    {% endfor %}
-</table>
-</div>
+        <td>{{ ul.time }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
 
-<div id='whiteboard'>
+  <div id='whiteboard'>
     <h2>Whiteboard:</h2>
 
     <form action="#" method="post">{% csrf_token %}
-        {{ notes_form.notes }}
-        <input type="submit" name='save_notes' value="Save" />
+      {{ notes_form.notes }}
+      <input type="submit" name='save_notes' value="Save" />
     </form>
-</div>
+  </div>
 
-<div id='contacts'>
+  <div id='contacts'>
 
-	    <h2>Record contact:</h2>
+    <h2>Record contact:</h2>
 
     <div id='comment-form'>
-        {% get_comment_form for person as form %}
-          <form action="{% comment_form_target %}" method="post">
-            {% csrf_token %}
-            {{ form.comment }}
-            {{ form.honeypot }}
-            {{ form.content_type }}
-            {{ form.object_pk }}
-            {{ form.timestamp }}
-            {{ form.security_hash }}
-            <input type="hidden" name="next" value="/contributors/{{ person.email }}#" />
-            <input type="submit" name="submit" value="Record contact">
-          </form>
+      {% get_comment_form for person as form %}
+      <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        {{ form.comment }}
+        {{ form.honeypot }}
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="hidden" name="next" value="/contributors/{{ person.email }}#" />
+        <input type="submit" name="submit" value="Record contact">
+      </form>
     </div>
 
     <h2>Contacts:</h2>
@@ -135,46 +135,46 @@
     {% get_comment_list for person as comment_list %}
     {% for comment in comment_list reversed %}
 
-        <div id='comment'>
-            {{ comment.comment|linebreaks }}
-            <h3>#{{ forloop.revcounter }}</h3>
-        </div>
+    <div id='comment'>
+      {{ comment.comment|linebreaks }}
+      <h3>#{{ forloop.revcounter }}</h3>
+    </div>
 
-        <div id='comment-details'>
-            by <a href="/users/{{ comment.user }}">{{ comment.user }}</a> on {{ comment.submit_date }}
-    			<form action="{% url 'delete_comment' person.email comment.id %}" method=POST>
-    				{% csrf_token %}
-    				<input type="submit" value="delete" />
-    			</form>
-        </div>
-        <br>
+    <div id='comment-details'>
+      by <a href="/users/{{ comment.user }}">{{ comment.user }}</a> on {{ comment.submit_date }}
+      <form action="{% url 'delete_comment' person.email comment.id %}" method=POST>
+    	{% csrf_token %}
+    	<input type="submit" value="delete" />
+      </form>
+    </div>
+    <br>
     {% endfor %}
 
-</div>
+  </div>
 
-<div id='uploads_per_release'>
+  <div id='uploads_per_release'>
     <h2>Uploads per release:</h2>
     <div id="uploads_per_release_chart"></div>
+  </div>
 </div>
-</div>
-  	
-<script type="text/javascript">
-	var textarea = document.getElementById('id_comment');
-	textarea.setAttribute('placeholder', 'After you contact the person leave a comment here...' + 
-	'                                                                                         ' + 
-	'Example: Emailed this person and encouraged her to apply for Debian Developer status');
-	
-	var textarea = document.getElementById('id_notes');
-	textarea.setAttribute('placeholder', 'Example: This person has skills in...');
 
-  	$("#unify").click(function() {
-    	$("#unifier").dialog({
-      		height: 300,
-      		width: 500,
-      		modal: true,
-    	});
-  	});
-  	
-	
+<script type="text/javascript">
+  var textarea = document.getElementById('id_comment');
+  textarea.setAttribute('placeholder', 'After you contact the person leave a comment here...' + 
+  '                                                                                         ' + 
+  'Example: Emailed this person and encouraged her to apply for Debian Developer status');
+  
+  var textarea = document.getElementById('id_notes');
+  textarea.setAttribute('placeholder', 'Example: This person has skills in...');
+
+  $("#unify").click(function() {
+  $("#unifier").dialog({
+  height: 300,
+  width: 500,
+  modal: true,
+  });
+  });
+  
+  
 </script> 
 {% endblock %}

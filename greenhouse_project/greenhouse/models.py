@@ -63,16 +63,10 @@ class Activity(models.Model):
     connection_name = 'default'
     type = models.CharField(max_length=128)
     subproject = models.CharField(max_length=128)
+    version = models.CharField(max_length=128, blank=True)
     time = models.DateTimeField(null=True, blank=True)
-    
-    package = models.TextField(blank=True)
-    version = models.TextField(blank=True)
-
     original_person = models.ForeignKey('Person', related_name='+', null=True)
     person = models.ForeignKey('Person', related_name='activities', null=True)
-
-    class Meta:
-        unique_together = ('package', 'version')
 
 
 class UserProfile(models.Model):
