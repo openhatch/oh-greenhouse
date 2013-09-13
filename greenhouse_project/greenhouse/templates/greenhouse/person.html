@@ -52,7 +52,7 @@
         </li>
         <li><b>DDPO:</b><a href="http://qa.debian.org/developer.php?email={{person.email}}"> {{person.name}}</a></li>   
         <li><b>Debian Developer:</b> {{ person.ubuntu_dev|yesno:"Yes,No" }}</li>
-        <li><b>Last Seen:</b> {{ person.last_upload.timestamp }}</li>
+        <li><b>Last Seen:</b> {{ person.latest }}</li>
        <li><b>Last Contact:</b> {{ person|recent_contact }}</li>
         <li><b>Total uploads:</b> {{ person.activities.count }}</li>
         {% if ppu_candidates %}
@@ -93,9 +93,9 @@
     </tr>
     {% for ul in recent_uploads %}
     <tr>
-        <td><a href="http://packages.qa.debian.org/{{ ul.package }}">{{ ul.package }}</a></td>
+        <td><a href="http://packages.qa.debian.org/{{ ul.subproject }}">{{ ul.subproject }}</a></td>
         <td>{{ ul.version }}</td>
-        <td>{{ ul.timestamp }}</td>
+        <td>{{ ul.time }}</td>
     </tr>
     {% endfor %}
 </table>

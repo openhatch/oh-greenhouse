@@ -103,7 +103,7 @@ def get_ppu_candidates(uploads):
     a list of package that were uploaded by a contributor more than
     five times.
     """
-    packages = uploads.values_list('package', flat=True)
+    packages = uploads.values_list('subproject', flat=True)
     ppu_candidates = []
     appearances = defaultdict(int)
     for curr in packages:
