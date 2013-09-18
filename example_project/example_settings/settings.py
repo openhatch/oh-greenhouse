@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from django.conf import global_settings
 
@@ -56,6 +57,18 @@ except IOError:
     DEBUG_MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     DEBUG_APPS = ('debug_toolbar',)
     INTERNAL_IPS = ('127.0.0.1',)
+
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'default',
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '',
+        },
+    }
 
 STATIC_SERVE = True
 
@@ -209,6 +222,8 @@ ALLOWED_LAUNCHPAD_TEAMS = ['ubuntu-developer-advisory-team',
                            'communitycouncil',
                            'canonical-community',
                            'greenhouse', ]
+
+SOUTH_TESTS_MIGRATE = False
 
 AUTH_PROFILE_MODULE = "greenhouse.UserProfile"
 
