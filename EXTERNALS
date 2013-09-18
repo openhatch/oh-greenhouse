@@ -4,14 +4,12 @@ licenses.
 
 overview/templates/base.html
 overview/media/css/base.css
-overview/media/css/orangeheader-stripes.png
-overview/media/css/background-dotted.png
     Source: lp:harvest
     Copyright: 2008-2009 Canonical Ltd.
     License:  GNU General Public License version 3
 
-overview/media/css/botstrap.css
+overview/media/css/bootstrap.css
     Source: http://twitter.github.io/bootstrap/
     Copyright: 2012 Twitter, Inc
     License: Apache License v2.0
-    Note: Only the noramalize/reset and grid system components are included.
+    Note: Only the normalize/reset and grid system components are included.
