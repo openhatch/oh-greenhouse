@@ -9,13 +9,15 @@ import re
 import random
 
 from greenhouse.models import UDD, Person, Activity
-
+import greenhouse
 
 class Command(NoArgsCommand):
     help = "Migrate upload data from UDD to django managed database."
     
     def get_debian_emails(self):
-        exclude_file = os.path.join(settings.PROJECT_PATH, 'debian-emails')
+        greenhouse_path = greenhouse.__path__[0]
+        data_path = os.path.join(greenhouse_path, 'data')
+        exclude_file = os.path.join(data_path, 'debian-emails.txt')
         with open(exclude_file) as f:
             return set(email.strip() for email in f)
 
