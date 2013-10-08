@@ -17,6 +17,9 @@ def create_dbs():
         port = db['PORT']
         db_name = db['NAME']
         db_type = db['ENGINE']
+        # don't build db from data sources
+        if host is not 'default':
+            break
         # see if it is mysql
         if db_type.endswith('mysql'):
             print 'creating database %s on %s' % (db_name, host)

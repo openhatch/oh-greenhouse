@@ -1,6 +1,8 @@
 #!/bin/sh
+set -x
+#export DJANGO_SETTINGS_MODULE=example_project.example_settings.settings
 python createdb.py
-python greenhouse_project/manage.py syncdb --noinput
+python example_project/manage.py syncdb --noinput
 python mkadmin.py
 mkdir -p /home/dotcloud/data/media /home/dotcloud/data/static
-python greenhouse_project/manage.py collectstatic --noinput
+python example_project/manage.py collectstatic --noinput

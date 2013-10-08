@@ -17,7 +17,6 @@ from django.utils import timezone
 from django.db.models import Q, Max, Min, Count
 
 from distro_info import UbuntuDistroInfo
-from generic_aggregation import generic_annotate
 
 from greenhouse.decorators import group_perm_required
 from greenhouse.models import Activity, Person, UserProfile
@@ -55,7 +54,7 @@ def suggestions(email):
     if not person.exclude and earliest_action > months(3):
         return 'This new contributor has not been contacted, \
         you should contact him/her, \
-        <a href="https://wiki.debian.org/GreeetingForNewContributors" \
+        <a href="https://wiki.debian.org/GreetingForNewContributors" \
         target="_blank">click here for sample email templates</a>'
     if not person.exclude and latest_action > months(4) and total_uploads > 40:
         return 'Suggest a new package for this person to work on'
