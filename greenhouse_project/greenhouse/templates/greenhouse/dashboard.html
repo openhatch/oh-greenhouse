@@ -1,11 +1,11 @@
 {% load custom_tags %}
 {% block dashboard %}
 
-<p>The purpose of this app is to help Debian Developer Advisory Team get in touch with new Debian contributors. 
-People who should get pinged are active contributors who become inactive as well as experienced people who should 
-be applying for developer status. 
-</p>
 <div id='content' class='row-fluid'>
+
+<h1>Say hi to these people</h1>
+
+<p>(That's all you have to do!)</p>
 
 <div class='dashboard-box span4'>
     <h3>New comers not greeted yet:</h3>
@@ -46,4 +46,9 @@ be applying for developer status.
             {% endfor %}
         </ul>
 </div>
+
+<p>The purpose of this app is to help Debian Developer Advisory Team get in touch with new Debian contributors. 
+People who should get pinged are active contributors who become inactive as well as experienced people who should 
+be applying for developer status. 
+</p>
 {% endblock %}
