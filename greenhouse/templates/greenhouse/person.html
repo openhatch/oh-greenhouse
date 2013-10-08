@@ -10,33 +10,6 @@
 </style>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-
-  google.load('visualization', '1.0', {'packages':['corechart']});
-
-  google.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Release');
-  data.addColumn('number', 'Uploads');
-  data.addRows([
-  {% for field, value in uploads_per_release.items %}
-  ['{{ field }}', {{ value }}],
-  {% endfor %}
-  ]);
-
-  var options = {'legend':'in',
-  'width':600,
-  'height':300,
-  'pointSize':5,
-  colors: ['#dd4814']};
-
-  var chart = new google.visualization.LineChart(document.getElementById('uploads_per_release_chart'));
-  chart.draw(data, options);
-  }
-</script>
 {% endblock %}
 
 {% block content %}
@@ -150,11 +123,6 @@
     <br>
     {% endfor %}
 
-  </div>
-
-  <div id='uploads_per_release'>
-    <h2>Uploads per release:</h2>
-    <div id="uploads_per_release_chart"></div>
   </div>
 </div>
 
