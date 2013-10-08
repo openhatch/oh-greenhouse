@@ -10,7 +10,7 @@
 <div class='dashboard-box span4'>
     <h3>New comers not greeted yet:</h3>
     {% for p in first_timers %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest.date }}</li>
     {% endfor %}
 </div>
 
@@ -24,14 +24,14 @@
 <div class='dashboard-box span4'>
     <h3>Haven't done an upload since being contacted:</h3>
     {% for p in inactive %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest.date }}</li>
     {% endfor %}
 </div>
 
 <div class='dashboard-box span4'>
     <h3>Was recently contacted:</h3>
     {% for p in contacted %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest.date }}</li>
     {% endfor %}
 </div>
 
