@@ -135,7 +135,11 @@
   'Example: Emailed this person and encouraged her to apply for Debian Developer status');
   
   var textarea = document.getElementById('id_notes');
-  textarea.setAttribute('placeholder', 'Example: This person has skills in...');
+  textarea.setAttribute('placeholder', "Write about anything that would be useful to other " +
+  "members of the Welcome Team. For example: This person is especially skilled in Python. " +
+  "This person really loves speaking Italian. This person is a pleasure to communicate with. " +
+  "This person is not very responsive to emails from welcome team people, but seems to remain " +
+  "active despite that. Etc.");
 
   $("#unify").click(function() {
   $("#unifier").dialog({
