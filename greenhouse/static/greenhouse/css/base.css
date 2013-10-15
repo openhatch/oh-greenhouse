@@ -196,7 +196,7 @@ h1 {
 }
 #content > h1 {
 	/* header at top of page */
-	margin-bottom:32px;
+	margin-bottom:8px;
 	padding:0px 8px;
 }
 
@@ -406,4 +406,8 @@ textarea{
 
 #id_honeypot {
     display: none;
+}
+
+.row-fluid .spanDashboard {
+  width: 30%;
 }
