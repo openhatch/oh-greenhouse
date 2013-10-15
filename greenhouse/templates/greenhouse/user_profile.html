@@ -5,22 +5,22 @@
 <h1>{{ profile.user.get_full_name}}</h1>
 
 <div class='main'>
-    <div id='user_details'>
-        <ul>
-            <li><b>Launchpad:</b> <a href="http://launchpad.net/~{{ profile.user.username }}">{{ profile.user.username }}</a></li>
-            <li><b>Last Login:</b> {{ profile.user.last_login|date:"D d M Y"}}</li>
-            <li><b>Teams:</b> 
-                {% for team in profile.user.groups.all %}
-                    {{ team }},
-                {% endfor %}
-            </li>
-            <li><b>Contributors Edited: </b>
-                {% for contrib in edited_contribs %}
-                    <a href="/contributors/{{ contrib }}">{{ contrib }}</a>, 
-                {% endfor %}
-            </li>
-        </ul>
-    </div>
+  <div id='user_details'>
+    <ul>
+      <li><b>Launchpad:</b> <a href="http://launchpad.net/~{{ profile.user.username }}">{{ profile.user.username }}</a></li>
+      <li><b>Last Login:</b> {{ profile.user.last_login|date:"D d M Y"}}</li>
+      <li><b>Teams:</b> 
+        {% for team in profile.user.groups.all %}
+        {{ team }},
+        {% endfor %}
+      </li>
+      <li><b>Contributors Edited: </b>
+        {% for contrib in edited_contribs %}
+        <a href="/contributors/{{ contrib }}">{{ contrib }}</a>, 
+        {% endfor %}
+      </li>
+    </ul>
+  </div>
 </div>
 
 {% endblock %}
