@@ -75,15 +75,6 @@
   </div>
 
 
-  <div id='whiteboard'>
-    <h2>Whiteboard:</h2>
-
-    <form action="#" method="post">{% csrf_token %}
-      {{ notes_form.notes }}
-      <input type="submit" name='save_notes' value="Save" />
-    </form>
-  </div>
-
   <div id='contacts'>
 
     <h2>Record contact:</h2>
@@ -125,6 +116,17 @@
 
   </div>
 </div>
+
+  <div id='whiteboard'>
+    <h2>Whiteboard:</h2>
+
+    <form action="#" method="post">{% csrf_token %}
+      {{ notes_form.notes }}
+      <input type="submit" name='save_notes' value="Save" />
+    </form>
+  </div>
+
+
 
 <script type="text/javascript">
   var textarea = document.getElementById('id_comment');
