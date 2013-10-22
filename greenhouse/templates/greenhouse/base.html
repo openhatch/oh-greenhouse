@@ -4,36 +4,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
 
-<head>
+  <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<title>{% block title %}{% trans "Greenhouse" %}{% endblock %}</title>
 	
-	<link rel="shortcut icon" href="{% static 'greenhouse/img/favicon.ico' %}" type="image/x-icon" />
-	
+	<link rel="shortcut icon" href="{% static 'greenhouse/img/favicon.ico' %}" type="image/x-icon" />	
 	<link rel="stylesheet" href="{% static 'greenhouse/css/bootstrap.css' %}" />
 	<link rel="stylesheet" href="{% static 'greenhouse/css/base.css' %}" />
-	{% block extracss %}{% endblock %}
+	{% block extracss %}
+    {% endblock %}
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{% static 'greenhouse/js/dat-overview.js' %}"></script>
 	
-	{% block extrahead %}{% endblock %}
-</head>
-
-<body>
-
-<div id="wrapper">
-
-<div id="header">
-	
-	<div id="mainheader">
-		<a id="sitetitle" href="{% url 'home' %}" class="quiet">
+	{% block extrahead %}
+    {% endblock %}
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+	    <div id="mainheader">
+		  <a id="sitetitle" href="{% url 'home' %}" class="quiet">
 			<span id="sitename">{% trans "Greenhouse" %}</span>
-		</a>
-	
-		<span id="userdata">
+		  </a>  
+		  <span id="userdata">
 			<span class="username">
-				<a href="/users/{{ user.username }}">{{ user.username }}</a>
+			  <a href="/users/{{ user.username }}">{{ user.username }}</a>
 			</span>
 			<span class="useraction"><ul>
 				{% if user.is_authenticated %}
@@ -42,40 +38,38 @@
 				<li><a href="/openid/login">{% trans "Log in" %}</a></li>
 				{% endif %}
 			</ul></span>
-		</span>
-	</div>
-	
-	{% if messages %}
+		  </span>
+	    </div>
+	    
+	    {% if messages %}
 		<div id="messages"><ul>
-		{% for message in messages %}
+		    {% for message in messages %}
 			<li>{{ message }}</li>
-		{% endfor %}
+		    {% endfor %}
 		</ul></div>
-	{% endif %}
-</div>
+	    {% endif %}
+      </div>
 
-<div id="content" class="container row-fluid">
-
-{% if in_allowed_group %}
-	<div class="offset1 span8">
-{% else %}
-	<div class="offset1 span10">
-{% endif %}
+      <div id="content" class="container row-fluid">
+        {% if in_allowed_group %}
+	    <div class="offset1 span8">
+          {% else %}
+	      <div class="offset1 span10">
+            {% endif %}
 			{% block content %}{% endblock %}
-	</div>
+	      </div>
+        </div>
 
-</div>
+        <div class="bottom"></div>
 
-<div class="bottom"></div>
-
-<div id="footer">
-	<div id="footnav">
-		<ul>
-		<li class="toplevel"><a href="{% url 'home' %}">{% trans "Greenhouse" %}</a></li>
-		<li><a href="https://github.com/openhatch/oh-greenhouse/issues?state=open" target="_blank">{% trans "Bugs" %}</a></li>
-		<li><a href="http://github.com/openhatch/oh-greenhouse" target="_blank">{% trans "Code" %}</a></li>
-		</ul>
-</div>
-</div>
-</body>
+        <div id="footer">
+	      <div id="footnav">
+		    <ul>
+		      <li class="toplevel"><a href="{% url 'home' %}">{% trans "Greenhouse" %}</a></li>
+		      <li><a href="https://github.com/openhatch/oh-greenhouse/issues?state=open" target="_blank">{% trans "Bugs" %}</a></li>
+		      <li><a href="http://github.com/openhatch/oh-greenhouse" target="_blank">{% trans "Code" %}</a></li>
+		    </ul>
+          </div>
+        </div>
+  </body>
 </html>

@@ -3,14 +3,14 @@
 
 {% block content %}
 <div class='main'>
-<form action="{{ lpid }}" method="post">{% csrf_token %}
+  <form action="{{ lpid }}" method="post">{% csrf_token %}
     {% for field in person_form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
+    <div class="fieldWrapper">
+      {{ field.errors }}
+      {{ field.label_tag }}: {{ field }}
+    </div>
     {% endfor %}
     <p><input type="submit" value="Save changes..." /></p>
-</form>
+  </form>
 </div>
 {% endblock %}

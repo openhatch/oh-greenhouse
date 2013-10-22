@@ -7,44 +7,50 @@
 
 <p>(That's all you have to do!)</p>
 
-<div class='dashboard-box span4'>
-    <h3>New comers not greeted yet:</h3>
+  <div class='dashboard-box spanDashboard'>
+    <h3>Uncontacted Newbies</h3>
     {% for p in first_timers %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest.date }}</li>
     {% endfor %}
-</div>
+    <p>Newcomers who need to be contacted</p>
+  </div>
 
-<div class='dashboard-box span4'>
-    <h3>Have done 40 uploads but need to be contacted:</h3>
+  <div class='dashboard-box spanDashboard'>
+    <h3>Uncontacted Veterans</h3>
     {% for p in experienced %}
         <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.total }} uploads</li>
     {% endfor %}
-</div>
+    <p>Have 40 uploads but are uncontacted</p>
+  </div>
 
-<div class='dashboard-box span4'>
-    <h3>Haven't done an upload since being contacted:</h3>
+  <div class='dashboard-box spanDashboard'>
+    <h3>Contacted but Inactive</h3>
     {% for p in inactive %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
+        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest.date }}</li>
     {% endfor %}
+    <p>Haven't uploaded since being contacted</p>
+  </div>
+
 </div>
 
-<div class='dashboard-box span4'>
-    <h3>Was recently contacted:</h3>
-    {% for p in contacted %}
-        <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest }}</li>
+
+<div id='content' class='row-fluid'>
+<div id='action_log' class='span6'>
+  <h2>Your Most Recent Actions:</h2>
+  <ul>{% for action in actions|slice:":20" %}
+    <li>{{ action.action_time|date:"D d M Y" }}:
+      <a href="/contributors/{{ action.object_repr }}">
+        {{ action.change_message }}</a></li>
     {% endfor %}
+  </ul>
 </div>
-
+<div id='action_log' class='span6'>
+  <h2>Most Recently Contacted:</h2>
+  <ul>{% for p in contacted|slice:":20" %}
+    <li><a href="contributors/{{ p.email }}">{{ p.name }}</a>, {{ p.latest.date }}</li>
+    {% endfor %}
+  </ul>
 </div>
-
-<div id='action_log'>
-    <h2>Your Most Recent Actions:</h2>
-        <ul>{% for action in actions|slice:":20" %}
-            <li>{{ action.action_time|date:"D d M Y" }}:
-                <a href="/contributors/{{ action.object_repr }}">
-                    {{ action.change_message }}</a></li>
-            {% endfor %}
-        </ul>
 </div>
 
 <p>The purpose of this app is to help Debian Developer Advisory Team get in touch with new Debian contributors. 
