@@ -1,8 +1,0 @@
-#!/bin/sh
-set -x
-#export DJANGO_SETTINGS_MODULE=example_project.example_settings.settings
-python createdb.py
-python example_project/manage.py syncdb --noinput
-python mkadmin.py
-mkdir -p /home/dotcloud/data/media /home/dotcloud/data/static
-python example_project/manage.py collectstatic --noinput
